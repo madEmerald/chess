@@ -17,6 +17,10 @@ Color Core::getCurrentColor() {
     return Color::Black;
 }
 
+void Core::newGame() {
+    printf("new game started yay!");
+}
+
 void BaseComponent::set_mediator(Core *core) {
     this->core_ = core;
 }

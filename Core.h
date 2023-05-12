@@ -17,6 +17,7 @@ public:
     Core(BaseComponent*, BaseComponent*);
     State getCurrentState();
     Color getCurrentColor();
+    void newGame();
 };
 
 class BaseComponent {

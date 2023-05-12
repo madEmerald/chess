@@ -27,7 +27,6 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QLabel *moveColor;
-    QPushButton *switchBoard;
     QPushButton *newGame;
     QTextBrowser *history;
     QLabel *moveColor_2;
@@ -51,28 +50,22 @@ public:
         font.setPointSize(30);
         moveColor->setFont(font);
         moveColor->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-        switchBoard = new QPushButton(centralWidget);
-        switchBoard->setObjectName(QString::fromUtf8("switchBoard"));
-        switchBoard->setGeometry(QRect(640, 587, 341, 71));
-        QFont font1;
-        font1.setPointSize(22);
-        switchBoard->setFont(font1);
         newGame = new QPushButton(centralWidget);
         newGame->setObjectName(QString::fromUtf8("newGame"));
-        newGame->setGeometry(QRect(640, 510, 341, 71));
-        QFont font2;
-        font2.setPointSize(24);
-        newGame->setFont(font2);
+        newGame->setGeometry(QRect(640, 580, 341, 71));
+        QFont font1;
+        font1.setPointSize(24);
+        newGame->setFont(font1);
         history = new QTextBrowser(centralWidget);
         history->setObjectName(QString::fromUtf8("history"));
-        history->setGeometry(QRect(640, 75, 341, 431));
+        history->setGeometry(QRect(640, 75, 341, 501));
         moveColor_2 = new QLabel(centralWidget);
         moveColor_2->setObjectName(QString::fromUtf8("moveColor_2"));
         moveColor_2->setEnabled(true);
         moveColor_2->setGeometry(QRect(630, 10, 341, 61));
-        QFont font3;
-        font3.setPointSize(28);
-        moveColor_2->setFont(font3);
+        QFont font2;
+        font2.setPointSize(28);
+        moveColor_2->setFont(font2);
         moveColor_2->setAlignment(Qt::AlignCenter);
         status = new QLabel(centralWidget);
         status->setObjectName(QString::fromUtf8("status"));
@@ -103,7 +96,6 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         moveColor->setText(QString());
-        switchBoard->setText(QApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\262\320\265\321\200\320\275\321\203\321\202\321\214 \320\264\320\276\321\201\320\272\321\203", nullptr));
         newGame->setText(QApplication::translate("MainWindow", "\320\235\320\276\320\262\320\260\321\217 \320\270\320\263\321\200\320\260", nullptr));
         moveColor_2->setText(QApplication::translate("MainWindow", " \320\230\321\201\321\202\320\276\321\200\320\270\321\217 \321\205\320\276\320\264\320\276\320\262", nullptr));
         status->setText(QString());

@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     ui->board->setPixmap(QPixmap("../images/board.png"));
+
+    connect(ui->newGame, &QPushButton::clicked, this, &MainWindow::newGame);
 }
 
 MainWindow::~MainWindow() {
@@ -48,5 +50,9 @@ void MainWindow::render() {
             ui->moveColor->setText("Ход чёрных");
             break;
     }
+}
+
+void MainWindow::newGame() {
+    this->core_->newGame();
 }
 

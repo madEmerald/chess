@@ -21,6 +21,9 @@ public:
     void render();
     ~MainWindow() override;
 
+public slots:
+    void newGame();
+
 private:
     Ui::MainWindow *ui;
 };
