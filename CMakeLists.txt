@@ -14,7 +14,7 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(chess main.cpp mainwindow.cpp mainwindow.h mainwindow.ui)
+add_executable(chess main.cpp mainwindow.cpp mainwindow.h mainwindow.ui Core.cpp Core.h)
 target_link_libraries(chess
         Qt5::Core
         Qt5::Gui

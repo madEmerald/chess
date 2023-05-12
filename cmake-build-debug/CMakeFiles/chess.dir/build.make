@@ -107,11 +107,26 @@ CMakeFiles/chess.dir/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/chess.dir/mainwindow.cpp.s"
 	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\CLionProjects\chess\mainwindow.cpp -o CMakeFiles\chess.dir\mainwindow.cpp.s
 
+CMakeFiles/chess.dir/Core.cpp.obj: CMakeFiles/chess.dir/flags.make
+CMakeFiles/chess.dir/Core.cpp.obj: CMakeFiles/chess.dir/includes_CXX.rsp
+CMakeFiles/chess.dir/Core.cpp.obj: ../Core.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\CLionProjects\chess\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/chess.dir/Core.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\chess.dir\Core.cpp.obj -c C:\CLionProjects\chess\Core.cpp
+
+CMakeFiles/chess.dir/Core.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/chess.dir/Core.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\CLionProjects\chess\Core.cpp > CMakeFiles\chess.dir\Core.cpp.i
+
+CMakeFiles/chess.dir/Core.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/chess.dir/Core.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\CLionProjects\chess\Core.cpp -o CMakeFiles\chess.dir\Core.cpp.s
+
 # Object files for target chess
 chess_OBJECTS = \
 "CMakeFiles/chess.dir/chess_autogen/mocs_compilation.cpp.obj" \
 "CMakeFiles/chess.dir/main.cpp.obj" \
-"CMakeFiles/chess.dir/mainwindow.cpp.obj"
+"CMakeFiles/chess.dir/mainwindow.cpp.obj" \
+"CMakeFiles/chess.dir/Core.cpp.obj"
 
 # External object files for target chess
 chess_EXTERNAL_OBJECTS =
@@ -119,6 +134,7 @@ chess_EXTERNAL_OBJECTS =
 chess.exe: CMakeFiles/chess.dir/chess_autogen/mocs_compilation.cpp.obj
 chess.exe: CMakeFiles/chess.dir/main.cpp.obj
 chess.exe: CMakeFiles/chess.dir/mainwindow.cpp.obj
+chess.exe: CMakeFiles/chess.dir/Core.cpp.obj
 chess.exe: CMakeFiles/chess.dir/build.make
 chess.exe: C:/Qt/Qt5.12.2/5.12.2/mingw73_64/lib/libQt5Widgetsd.a
 chess.exe: C:/Qt/Qt5.12.2/5.12.2/mingw73_64/lib/libQt5Guid.a
@@ -126,7 +142,7 @@ chess.exe: C:/Qt/Qt5.12.2/5.12.2/mingw73_64/lib/libQt5Cored.a
 chess.exe: CMakeFiles/chess.dir/linklibs.rsp
 chess.exe: CMakeFiles/chess.dir/objects1.rsp
 chess.exe: CMakeFiles/chess.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\CLionProjects\chess\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable chess.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\CLionProjects\chess\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable chess.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\chess.dir\link.txt --verbose=$(VERBOSE)
 	"C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E make_directory C:/CLionProjects/chess/cmake-build-debug/plugins/platforms/
 	"C:\Program Files\JetBrains\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" -E copy C:/Qt/Qt5.12.2/5.12.2/mingw73_64/plugins/platforms/qwindowsd.dll C:/CLionProjects/chess/cmake-build-debug/plugins/platforms/

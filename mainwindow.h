@@ -6,13 +6,14 @@
 #define CHESS_MAINWINDOW_H
 
 #include <QMainWindow>
+#include "Core.h"
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow, public BaseComponent {
 Q_OBJECT
 
 public:
