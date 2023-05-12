@@ -141,6 +141,30 @@ chess_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess_autogen.dir\build.make CMakeFiles/chess_autogen.dir/build
 .PHONY : chess_autogen/fast
 
+Chess.obj: Chess.cpp.obj
+.PHONY : Chess.obj
+
+# target to build an object file
+Chess.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess.dir\build.make CMakeFiles/chess.dir/Chess.cpp.obj
+.PHONY : Chess.cpp.obj
+
+Chess.i: Chess.cpp.i
+.PHONY : Chess.i
+
+# target to preprocess a source file
+Chess.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess.dir\build.make CMakeFiles/chess.dir/Chess.cpp.i
+.PHONY : Chess.cpp.i
+
+Chess.s: Chess.cpp.s
+.PHONY : Chess.s
+
+# target to generate assembly for a file
+Chess.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chess.dir\build.make CMakeFiles/chess.dir/Chess.cpp.s
+.PHONY : Chess.cpp.s
+
 Core.obj: Core.cpp.obj
 .PHONY : Core.obj
 
@@ -247,6 +271,9 @@ help:
 	@echo ... rebuild_cache
 	@echo ... chess_autogen
 	@echo ... chess
+	@echo ... Chess.obj
+	@echo ... Chess.i
+	@echo ... Chess.s
 	@echo ... Core.obj
 	@echo ... Core.i
 	@echo ... Core.s

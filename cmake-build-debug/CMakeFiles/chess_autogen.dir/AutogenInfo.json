@@ -78,6 +78,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/CLionProjects/chess/Chess.h",
+			"MU",
+			"EWIEGA46WW/moc_Chess.cpp",
+			null
+		],
+		[
 			"C:/CLionProjects/chess/Core.h",
 			"MU",
 			"EWIEGA46WW/moc_Core.cpp",
@@ -140,6 +146,7 @@
 	"SETTINGS_FILE" : "C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "C:/CLionProjects/chess/Chess.cpp", "MU", null ],
 		[ "C:/CLionProjects/chess/Core.cpp", "MU", null ],
 		[ "C:/CLionProjects/chess/main.cpp", "MU", null ],
 		[ "C:/CLionProjects/chess/mainwindow.cpp", "MU", null ]
