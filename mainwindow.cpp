@@ -56,3 +56,6 @@ void MainWindow::newGame() {
     this->core_->newGame();
 }
 
+void MainWindow::addMoveToHistory(const QString& s) {
+    ui->history->append(s);
+}

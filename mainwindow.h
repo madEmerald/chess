@@ -19,6 +19,7 @@ Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     void render();
+    void addMoveToHistory(const QString&);
     ~MainWindow() override;
 
 public slots:
