@@ -1,0 +1,4 @@
+C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess.dir
+C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess_autogen.dir
