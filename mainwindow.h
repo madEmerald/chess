@@ -18,7 +18,7 @@ Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-
+    void render();
     ~MainWindow() override;
 
 private:

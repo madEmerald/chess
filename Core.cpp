@@ -9,6 +9,14 @@ Core::Core(BaseComponent *interface, BaseComponent *game) : interface_(interface
     this->game_->set_mediator(this);
 }
 
+State Core::getCurrentState() {
+    return State::Mate;
+}
+
+Color Core::getCurrentColor() {
+    return Color::Black;
+}
+
 void BaseComponent::set_mediator(Core *core) {
     this->core_ = core;
 }

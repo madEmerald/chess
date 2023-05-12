@@ -6,6 +6,7 @@
 #define CHESS_CORE_H
 
 #include <string>
+#include "Chess.h"
 
 class BaseComponent;
 class Core {
@@ -14,6 +15,8 @@ private:
     BaseComponent *game_;
 public:
     Core(BaseComponent*, BaseComponent*);
+    State getCurrentState();
+    Color getCurrentColor();
 };
 
 class BaseComponent {
