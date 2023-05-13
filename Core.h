@@ -6,18 +6,22 @@
 #define CHESS_CORE_H
 
 #include <string>
+#include <set>
 #include "Chess.h"
 
 class BaseComponent;
 class Core {
 private:
     BaseComponent *interface_;
+    BaseComponent *board_;
     BaseComponent *game_;
 public:
     Core(BaseComponent*, BaseComponent*);
     State getCurrentState();
     Color getCurrentColor();
     void newGame();
+    std::set<cell> getAvailableMoves(cell);
+    bool makeTurn(cell, cell);
 };
 
 class BaseComponent {

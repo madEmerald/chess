@@ -7,9 +7,13 @@
 #IncludeRegexTransform: 
 
 C:/CLionProjects/chess/Chess.h
+utility
+-
 
 C:/CLionProjects/chess/Core.h
 string
+-
+set
 -
 Chess.h
 C:/CLionProjects/chess/Chess.h
@@ -19,14 +23,28 @@ mainwindow.h
 C:/CLionProjects/chess/mainwindow.h
 ui_MainWindow.h
 C:/CLionProjects/chess/ui_MainWindow.h
-Chess.h
-C:/CLionProjects/chess/Chess.h
+QMouseEvent
+-
+QPainter
+-
+QDebug
+-
 
 C:/CLionProjects/chess/mainwindow.h
 QMainWindow
 -
 Core.h
 C:/CLionProjects/chess/Core.h
+utility
+-
+QLabel
+-
+QPainter
+-
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QDebug
+qdebug.h
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/qdebug.h
 
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QVariant
 qvariant.h
@@ -736,6 +754,14 @@ C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/qversiontagging.h
 QtCore/qglobal.h
 -
 
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/QMouseEvent
+qevent.h
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/qevent.h
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/QPainter
+qpainter.h
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/qpainter.h
+
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/qbrush.h
 QtGui/qtguiglobal.h
 -
@@ -922,6 +948,38 @@ QtGui/qtguiglobal.h
 QtGui/qwindowdefs.h
 -
 QtCore/qrect.h
+-
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/qpainter.h
+QtGui/qtguiglobal.h
+-
+QtCore/qnamespace.h
+-
+QtCore/qrect.h
+-
+QtCore/qpoint.h
+-
+QtCore/qscopedpointer.h
+-
+QtGui/qpixmap.h
+-
+QtGui/qimage.h
+-
+QtGui/qtextoption.h
+-
+QtGui/qpolygon.h
+-
+QtGui/qpen.h
+-
+QtGui/qbrush.h
+-
+QtGui/qmatrix.h
+-
+QtGui/qtransform.h
+-
+QtGui/qfontinfo.h
+-
+QtGui/qfontmetrics.h
 -
 
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtGui/qpainterpath.h

@@ -21,6 +21,14 @@ void Core::newGame() {
     printf("new game started yay!");
 }
 
+std::set<cell> Core::getAvailableMoves(cell c) {
+    return {c};
+}
+
+bool Core::makeTurn(cell, cell) {
+    return true;
+}
+
 void BaseComponent::set_mediator(Core *core) {
     this->core_ = core;
 }
