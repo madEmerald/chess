@@ -123,19 +123,6 @@ p, li { white-space: pre-wrap; }
      <set>Qt::AlignHCenter|Qt::AlignTop</set>
     </property>
    </widget>
-   <widget class="QLabel" name="board">
-    <property name="geometry">
-     <rect>
-      <x>45</x>
-      <y>70</y>
-      <width>584</width>
-      <height>584</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
