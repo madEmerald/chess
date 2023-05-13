@@ -24,7 +24,7 @@ Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
 
-    void showInfo();
+    void render();
 
     void addMoveToHistory(const QString &);
 

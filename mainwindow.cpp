@@ -21,7 +21,7 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::showInfo() {
+void MainWindow::render() {
     State currentState = this->core_->getCurrentState();
     Color currentColor = this->core_->getCurrentColor();
 
