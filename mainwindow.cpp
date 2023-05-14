@@ -65,7 +65,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
     int y = event->y();
     if (x >= this->leftTopBoardPoint.x() && x <= this->rightDownBoardPoint.x() &&
         y >= this->leftTopBoardPoint.y() && y <= this->rightDownBoardPoint.y()) {
-        cell clickedCell = this->getClickedCell(event->x(), event->y());
+        Cell clickedCell = this->getClickedCell(event->x(), event->y());
         if (this->availableMoves.count(clickedCell)) {
             this->core_->makeTurn(this->selectedCell, clickedCell);
 
@@ -80,12 +80,12 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-cell MainWindow::getClickedCell(int x, int y) const {
+Cell MainWindow::getClickedCell(int x, int y) const {
     return {(x - this->leftTopBoardPoint.x()) / this->cellSize,
             (y - this->leftTopBoardPoint.y()) / this->cellSize};
 }
 
-QPoint MainWindow::getCoordsOfCell(cell c) const {
+QPoint MainWindow::getCoordsOfCell(Cell c) const {
     return {this->leftTopBoardPoint.x() + this->cellSize * c.first,
             this->leftTopBoardPoint.y() + this->cellSize * c.second};
 }
@@ -94,7 +94,11 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.drawPixmap(45, 70, QPixmap("../images/board.png"));
 
-    for (cell x: this->availableMoves) {
-        painter.drawPixmap(getCoordsOfCell(x), this->sprites["mv"]);
+    for (Cell x: this->availableMoves) {
+        painter.drawPixmap(getCoordsOfCell(x), QPixmap("../images/availableMove.png"));
+    }
+
+    for (Token x: this->pieces) {
+        painter.drawPixmap(getCoordsOfCell(x.getPosition()), this->sprites[x.getType()]);
     }
 }

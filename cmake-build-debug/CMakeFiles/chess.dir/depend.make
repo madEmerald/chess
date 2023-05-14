@@ -257,7 +257,6 @@ CMakeFiles/chess.dir/mainwindow.cpp.obj: \
  ../Core.h \
  ../mainwindow.cpp \
  ../mainwindow.h \
- C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QDebug \
  C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QVariant \
  C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/qalgorithms.h \
  C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/qarraydata.h \

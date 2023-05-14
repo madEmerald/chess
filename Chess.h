@@ -7,7 +7,7 @@
 
 #include <utility>
 
-using cell = std::pair<int, int>;
+using Cell = std::pair<int, int>;
 
 enum class Color {
     Write,

@@ -31,7 +31,6 @@ public:
     QTextBrowser *history;
     QLabel *moveColor_2;
     QLabel *status;
-    QLabel *board;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -76,9 +75,6 @@ public:
         status->setGeometry(QRect(50, 660, 581, 61));
         status->setFont(font);
         status->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-        board = new QLabel(centralWidget);
-        board->setObjectName(QString::fromUtf8("board"));
-        board->setGeometry(QRect(45, 70, 584, 584));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -108,7 +104,6 @@ public:
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:72pt;\"><br /></p></body></html>", nullptr));
         moveColor_2->setText(QApplication::translate("MainWindow", " \320\230\321\201\321\202\320\276\321\200\320\270\321\217 \321\205\320\276\320\264\320\276\320\262", nullptr));
         status->setText(QString());
-        board->setText(QString());
     } // retranslateUi
 
 };

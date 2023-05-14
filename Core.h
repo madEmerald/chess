@@ -9,19 +9,36 @@
 #include <set>
 #include "Chess.h"
 
+using Cell = std::pair<int, int>;
+
+class Token {
+public:
+    Token(Cell, std::string);
+    Cell getPosition();
+    std::string getType();
+protected:
+    Cell position_;
+    std::string type_;
+};
+
 class BaseComponent;
+
 class Core {
 private:
     BaseComponent *interface_;
-    BaseComponent *board_;
     BaseComponent *game_;
 public:
-    Core(BaseComponent*, BaseComponent*);
+    Core(BaseComponent *, BaseComponent *);
+
     State getCurrentState();
+
     Color getCurrentColor();
+
     void newGame();
-    std::set<cell> getAvailableMoves(cell);
-    bool makeTurn(cell, cell);
+
+    std::set<Cell> getAvailableMoves(Cell);
+
+    bool makeTurn(Cell, Cell);
 };
 
 class BaseComponent {
@@ -30,7 +47,8 @@ protected:
 
 public:
     explicit BaseComponent(Core *core = nullptr);
-    void set_mediator(Core *core);
+
+    void setCore(Core *core);
 };
 
 #endif //CHESS_CORE_H

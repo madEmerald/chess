@@ -27,8 +27,6 @@ QMouseEvent
 -
 QPainter
 -
-QDebug
--
 
 C:/CLionProjects/chess/mainwindow.h
 QMainWindow
@@ -41,10 +39,6 @@ QLabel
 -
 QPainter
 -
-
-C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QDebug
-qdebug.h
-C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/qdebug.h
 
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QVariant
 qvariant.h
