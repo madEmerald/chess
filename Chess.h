@@ -43,6 +43,7 @@ private:
     State currentState;
     std::set<Move> allPossibleMoves;
     bool isLongCastlingPossible();
+    bool isShortCastlingPossible();
     bool isUnderAttack(Coords);
     Cell getCell(Coords);
     Board board;

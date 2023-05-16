@@ -5,12 +5,16 @@
 #include <algorithm>
 #include "Chess.h"
 
+Color opposite(Color c) {
+    return c == Color::Write ? Color::Black : Color::Write;
+}
+
 Color Game::getCurrentColor() {
-    return Color::Black;
+    return this->currentColor;
 }
 
 State Game::getCurrentState() {
-    return State::Common;
+    return this->currentState;
 }
 
 void Game::newGame() {
@@ -31,12 +35,11 @@ Cell Game::getCell(Coords c) {
 bool Game::isLongCastlingPossible() {
     int x = this->getCurrentColor() == Color::Write ? 0 : 7;
 
-    Piece* king = this->getCell({x, 0}).getPiece();
-    Piece* rook = this->getCell({x, 4}).getPiece();
+    Piece* king = this->getCell({x, 4}).getPiece();
+    Piece* rook = this->getCell({x, 0}).getPiece();
 
-    if (king == nullptr || rook == nullptr) {
+    if (king == nullptr || rook == nullptr)
         return false;
-    }
 
     if (king->getType != PieceType::King || rook->getType != PieceType::Rook)
         return false;
@@ -47,15 +50,38 @@ bool Game::isLongCastlingPossible() {
     if (king->isMoved() || rook->isMoved())
         return false;
 
-    if (this->getCell({x, 1}).getPiece() != nullptr || this->getCell({x, 1}).getPiece()
-        || this->getCell({x, 1}).getPiece())
+    if (this->getCell({x, 1}).getPiece() != nullptr || this->getCell({x, 2}).getPiece()
+        || this->getCell({x, 3}).getPiece())
         return false;
 
-    if (this->isUnderAttack({x, 4}) || this->isUnderAttack({x, 4}))
+    if (this->isUnderAttack({x, 4}) || this->isUnderAttack({x, 2}))
         return false;
 
     return true;
+}
 
+bool Game::isShortCastlingPossible() {
+    int x = this->getCurrentColor() == Color::Write ? 0 : 7;
+
+    Piece* king = this->getCell({x, 4}).getPiece();
+    Piece* rook = this->getCell({x, 7}).getPiece();
+
+    if (king == nullptr || rook == nullptr)
+        return false;
+
+    if (king->getType != PieceType::King || rook->getType != PieceType::Rook)
+        return false;
+
+    if (king->isMoved() || rook->isMoved())
+        return false;
+
+    if (this->getCell({x, 5}).getPiece() != nullptr || this->getCell({x, 6}).getPiece())
+        return false;
+
+    if (this->isUnderAttack({x, 4}) || this->isUnderAttack({x, 6}))
+        return false;
+
+    return true;
 }
 
 bool Game::makeMove(Coords, Coords) {
@@ -63,7 +89,7 @@ bool Game::makeMove(Coords, Coords) {
 }
 
 bool Game::isUnderAttack(Coords c) {
-    return this->board.isUnderAttack(c, this->getCurrentColor());
+    return this->board.isUnderAttack(c, opposite(this->getCurrentColor()));
 }
 
 
