@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/CLionProjects/chess/BaseComponent.cpp" "C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess.dir/BaseComponent.cpp.obj"
   "C:/CLionProjects/chess/Chess.cpp" "C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess.dir/Chess.cpp.obj"
   "C:/CLionProjects/chess/Core.cpp" "C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess.dir/Core.cpp.obj"
   "C:/CLionProjects/chess/cmake-build-debug/chess_autogen/mocs_compilation.cpp" "C:/CLionProjects/chess/cmake-build-debug/CMakeFiles/chess.dir/chess_autogen/mocs_compilation.cpp.obj"

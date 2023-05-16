@@ -6,10 +6,11 @@
 #define CHESS_MAINWINDOW_H
 
 #include <QMainWindow>
-#include "Core.h"
 #include <utility>
 #include <QLabel>
 #include <QPainter>
+#include <set>
+#include "BaseComponent.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -32,21 +33,22 @@ public slots:
 
     void newGame();
 
+    void choosePawnPromoting(std::string&);
+
 private:
     void mousePressEvent(QMouseEvent *event) override;
 
     void paintEvent(QPaintEvent *event) override;
 
-    [[nodiscard]] Cell getClickedCell(int, int) const;
+    [[nodiscard]] Coords getClickedCell(int, int) const;
 
-    [[nodiscard]] QPoint getCoordsOfCell(Cell) const;
+    [[nodiscard]] QPoint getCoordsOfCell(Coords) const;
 
     const int cellSize = 63;
     const QPoint leftTopBoardPoint = {85, 110};
     const QPoint rightDownBoardPoint = {leftTopBoardPoint.x() + 8 * cellSize,
                                         leftTopBoardPoint.y() + 8 * cellSize};
-    std::map<std::string, QPixmap> sprites = {{"mv", QPixmap("../images/availableMove.png")},
-                                              {"bB", QPixmap("../images/blackBishop.png")},
+    std::map<std::string, QPixmap> sprites = {{"bB", QPixmap("../images/blackBishop.png")},
                                               {"bK", QPixmap("../images/blackKing.png")},
                                               {"bKn", QPixmap("../images/blackKnight.png")},
                                               {"bP", QPixmap("../images/blackPawn.png")},
@@ -57,10 +59,10 @@ private:
                                               {"wKn", QPixmap("../images/whiteKnight.png")},
                                               {"wP", QPixmap("../images/whitePawn.png")},
                                               {"wQ", QPixmap("../images/whiteQueen.png")},
-                                              {"wR", QPixmap("../images/whiteRook.png")},};
+                                              {"wR", QPixmap("../images/whiteRook.png")}};
 
-    Cell selectedCell = {-1, -1};
-    std::set<Cell> availableMoves;
+    Coords selectedCell = {-1, -1};
+    std::set<Coords> availableMoves;
     std::vector<Token> pieces;
     Ui::MainWindow *ui;
 };

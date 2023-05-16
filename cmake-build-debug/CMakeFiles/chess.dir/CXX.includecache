@@ -6,9 +6,19 @@
 
 #IncludeRegexTransform: 
 
+C:/CLionProjects/chess/BaseComponent.h
+utility
+-
+string
+-
+
 C:/CLionProjects/chess/Chess.h
 utility
 -
+set
+-
+BaseComponent.h
+C:/CLionProjects/chess/BaseComponent.h
 
 C:/CLionProjects/chess/Core.h
 string
@@ -17,6 +27,8 @@ set
 -
 Chess.h
 C:/CLionProjects/chess/Chess.h
+mainwindow.h
+C:/CLionProjects/chess/mainwindow.h
 
 C:/CLionProjects/chess/mainwindow.cpp
 mainwindow.h
@@ -27,18 +39,28 @@ QMouseEvent
 -
 QPainter
 -
+QDialog
+-
+QVBoxLayout
+-
+iostream
+-
+Core.h
+C:/CLionProjects/chess/Core.h
 
 C:/CLionProjects/chess/mainwindow.h
 QMainWindow
 -
-Core.h
-C:/CLionProjects/chess/Core.h
 utility
 -
 QLabel
 -
 QPainter
 -
+set
+-
+BaseComponent.h
+C:/CLionProjects/chess/BaseComponent.h
 
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/QVariant
 qvariant.h
@@ -1182,6 +1204,10 @@ C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/QApplication
 qapplication.h
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qapplication.h
 
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/QDialog
+qdialog.h
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qdialog.h
+
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/QLabel
 qlabel.h
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qlabel.h
@@ -1209,6 +1235,10 @@ C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qtextbrowser.h
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/QToolBar
 qtoolbar.h
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qtoolbar.h
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/QVBoxLayout
+qboxlayout.h
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qboxlayout.h
 
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/QWidget
 qwidget.h
@@ -1270,7 +1300,23 @@ QtWidgets/qdesktopwidget.h
 QtGui/qguiapplication.h
 -
 
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qboxlayout.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qlayout.h
+-
+QtWidgets/qwidget.h
+-
+limits.h
+-
+
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qdesktopwidget.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qwidget.h
+-
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qdialog.h
 QtWidgets/qtwidgetsglobal.h
 -
 QtWidgets/qwidget.h
@@ -1282,10 +1328,50 @@ QtWidgets/qtwidgetsglobal.h
 QtWidgets/qwidget.h
 -
 
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qgridlayout.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qlayout.h
+-
+QtWidgets/qwidget.h
+-
+limits.h
+-
+
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qlabel.h
 QtWidgets/qtwidgetsglobal.h
 -
 QtWidgets/qframe.h
+-
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qlayout.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtCore/qobject.h
+-
+QtWidgets/qlayoutitem.h
+-
+QtWidgets/qsizepolicy.h
+-
+QtCore/qrect.h
+-
+QtCore/qmargins.h
+-
+limits.h
+-
+QtWidgets/qboxlayout.h
+-
+QtWidgets/qgridlayout.h
+-
+
+C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qlayoutitem.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qsizepolicy.h
+-
+QtCore/qrect.h
+-
+limits.h
 -
 
 C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qmainwindow.h

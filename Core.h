@@ -8,27 +8,16 @@
 #include <string>
 #include <set>
 #include "Chess.h"
-
-using Cell = std::pair<int, int>;
-
-class Token {
-public:
-    Token(Cell, std::string);
-    Cell getPosition();
-    std::string getType();
-protected:
-    Cell position_;
-    std::string type_;
-};
+#include "mainwindow.h"
 
 class BaseComponent;
 
 class Core {
 private:
-    BaseComponent *interface_;
-    BaseComponent *game_;
+    MainWindow *interface_;
+    Game *game_;
 public:
-    Core(BaseComponent *, BaseComponent *);
+    Core(MainWindow *, Game *);
 
     State getCurrentState();
 
@@ -36,19 +25,11 @@ public:
 
     void newGame();
 
-    std::set<Cell> getAvailableMoves(Cell);
+    std::set<Coords> getAvailableMoves(Coords);
 
-    bool makeTurn(Cell, Cell);
-};
+    bool makeMove(Coords, Coords);
 
-class BaseComponent {
-protected:
-    Core *core_;
-
-public:
-    explicit BaseComponent(Core *core = nullptr);
-
-    void setCore(Core *core);
+    void choosePawnPromoting(std::string&);
 };
 
 #endif //CHESS_CORE_H

@@ -110,6 +110,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/CLionProjects/chess/BaseComponent.cpp">
+			<Option target="chess"/>
+		</Unit>
+		<Unit filename="C:/CLionProjects/chess/BaseComponent.h">
+			<Option target="chess"/>
+		</Unit>
 		<Unit filename="C:/CLionProjects/chess/Chess.cpp">
 			<Option target="chess"/>
 		</Unit>

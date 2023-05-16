@@ -4,45 +4,31 @@
 
 #include "Core.h"
 
-#include <utility>
-
-Core::Core(BaseComponent *interface, BaseComponent *game) : interface_(interface), game_(game) {
+Core::Core(MainWindow *interface, Game *game) : interface_(interface), game_(game) {
     this->interface_->setCore(this);
     this->game_->setCore(this);
 }
 
 State Core::getCurrentState() {
-    return State::Mate;
+    return this->game_->getCurrentState();
 }
 
 Color Core::getCurrentColor() {
-    return Color::Black;
+    return this->game_->getCurrentColor();
 }
 
 void Core::newGame() {
-    printf("new game started yay!");
+    this->game_->newGame();
 }
 
-std::set<Cell> Core::getAvailableMoves(Cell c) {
-    return {c};
+std::set<Coords> Core::getAvailableMoves(Coords c) {
+    return this->game_->getAvailableMoves(c);
 }
 
-bool Core::makeTurn(Cell, Cell) {
-    return true;
+bool Core::makeMove(Coords from, Coords to) {
+    return this->game_->makeMove(from, to);
 }
 
-void BaseComponent::setCore(Core *core) {
-    this->core_ = core;
-}
-
-BaseComponent::BaseComponent(Core *core) : core_(core) {}
-
-Token::Token(Cell position, std::string type) : position_(std::move(position)), type_(std::move(type)) {}
-
-Cell Token::getPosition() {
-    return this->position_;
-}
-
-std::string Token::getType() {
-    return this->type_;
+void Core::choosePawnPromoting(std::string& s) {
+    this->interface_->choosePawnPromoting(s);
 }
