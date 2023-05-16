@@ -42,6 +42,7 @@ private:
     Color currentColor;
     State currentState;
     std::set<Move> allPossibleMoves;
+    bool isLongCastlingPossible();
     bool isUnderAttack(Coords);
     Cell getCell(Coords);
     Board board;
