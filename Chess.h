@@ -23,7 +23,7 @@ public:
     PieceType getType();
     Color getColor();
     bool isMoved();
-    bool canMove();
+    bool canMove(Coords);
     bool makeMove(Coords, Board);
     bool makeMove(Coords, Board, std::string &);
 };

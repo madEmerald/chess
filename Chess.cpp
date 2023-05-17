@@ -139,7 +139,12 @@ bool Board::isShortCastlingPossible(Color c) {
 }
 
 bool Board::isUnderAttack(Coords coords, Color color) {
-
+    for (int i = 0; i < 64; ++i) {
+        Piece* attacker = this->cells[i / 8][i % 8].getPiece();
+        if (attacker != nullptr && attacker->getColor() != color && attacker->canMove(coords))
+            return true;
+    }
+    return false;
 }
 
 
@@ -181,5 +186,9 @@ PieceType Piece::getType() {
 
 Color Piece::getColor() {
     return Color::Black;
+}
+
+bool Piece::canMove(Coords) {
+    return false;
 }
 
