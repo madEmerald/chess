@@ -22,21 +22,23 @@ public:
     PieceType getType;
     Color getColor;
     bool isMoved();
+    bool makeMove(Coords);
 };
 
 class Cell {
+private:
+    Piece* piece;
 public:
     Piece* getPiece();
 };
 
 class Board {
 private:
-    Cell board[8][8];
+    Cell cells[8][8];
 public:
     Cell getCell(Coords);
     bool isLongCastlingPossible(Color);
     bool isShortCastlingPossible(Color);
-    bool makeMove(Move);
     bool isUnderAttack(Coords, Color);
 };
 
@@ -46,6 +48,7 @@ private:
     State currentState;
     std::set<Move> allPossibleMoves;
     Board board;
+    void updateStatus();
 public:
     Color getCurrentColor();
     State getCurrentState();

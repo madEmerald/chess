@@ -28,8 +28,19 @@ std::set<Coords> Game::getAvailableMoves(Coords c) {
     return availableMoves;
 }
 
-bool Game::makeMove(Move) {
+bool Game::makeMove(Move m) {
+    if (this->allPossibleMoves.count(m)) {
+        this->board.getCell(m.first).getPiece()->makeMove(m.second);
+        this->currentColor = oppositeColor(this->currentColor);
+        this->updateStatus();
+
+        return true;
+    }
     return false;
+}
+
+void Game::updateStatus() {
+
 }
 
 bool Board::isLongCastlingPossible(Color c) {
@@ -88,24 +99,24 @@ bool Board::isShortCastlingPossible(Color c) {
     return true;
 }
 
-bool Board::makeMove(Move) {
-    return false;
-}
-
 bool Board::isUnderAttack(Coords coords, Color color) {
 
 }
 
 
+Cell Board::getCell(Coords c) {
+    return this->cells[c.first][c.second];
+}
+
 Piece *Cell::getPiece() {
-    return nullptr;
+    return this->piece;
 }
 
 bool Piece::isMoved() {
-    return false;
+    return this->moved;
 }
 
-Cell Board::getCell(Coords) {
-    return Cell();
+bool Piece::makeMove(Coords) {
+    return false;
 }
 
