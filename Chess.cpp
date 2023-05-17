@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "Chess.h"
 
-Color opposite(Color c) {
+Color oppositeColor(Color c) {
     return c == Color::Write ? Color::Black : Color::Write;
 }
 
@@ -28,12 +28,12 @@ std::set<Coords> Game::getAvailableMoves(Coords c) {
     return availableMoves;
 }
 
-Cell Game::getCell(Coords c) {
-    return this->board.getCell(c);
+bool Game::makeMove(Move) {
+    return false;
 }
 
-bool Game::isLongCastlingPossible() {
-    int x = this->getCurrentColor() == Color::Write ? 0 : 7;
+bool Board::isLongCastlingPossible(Color c) {
+    int x = c == Color::Write ? 0 : 7;
 
     Piece* king = this->getCell({x, 4}).getPiece();
     Piece* rook = this->getCell({x, 0}).getPiece();
@@ -44,7 +44,7 @@ bool Game::isLongCastlingPossible() {
     if (king->getType != PieceType::King || rook->getType != PieceType::Rook)
         return false;
 
-    if (king->getColor != this->getCurrentColor() || rook->getColor != this->getCurrentColor())
+    if (king->getColor != c || rook->getColor != c)
         return false;
 
     if (king->isMoved() || rook->isMoved())
@@ -54,14 +54,14 @@ bool Game::isLongCastlingPossible() {
         || this->getCell({x, 3}).getPiece())
         return false;
 
-    if (this->isUnderAttack({x, 4}) || this->isUnderAttack({x, 2}))
+    if (this->isUnderAttack({x, 4}, oppositeColor(c)) || this->isUnderAttack({x, 2}, oppositeColor(c)))
         return false;
 
     return true;
 }
 
-bool Game::isShortCastlingPossible() {
-    int x = this->getCurrentColor() == Color::Write ? 0 : 7;
+bool Board::isShortCastlingPossible(Color c) {
+    int x = c == Color::Write ? 0 : 7;
 
     Piece* king = this->getCell({x, 4}).getPiece();
     Piece* rook = this->getCell({x, 7}).getPiece();
@@ -78,18 +78,18 @@ bool Game::isShortCastlingPossible() {
     if (this->getCell({x, 5}).getPiece() != nullptr || this->getCell({x, 6}).getPiece())
         return false;
 
-    if (this->isUnderAttack({x, 4}) || this->isUnderAttack({x, 6}))
+    if (this->isUnderAttack({x, 4}, oppositeColor(c)) || this->isUnderAttack({x, 6}, oppositeColor(c)))
         return false;
 
     return true;
 }
 
-bool Game::makeMove(Coords, Coords) {
+bool Board::makeMove(Move) {
     return false;
 }
 
-bool Game::isUnderAttack(Coords c) {
-    return this->board.isUnderAttack(c, opposite(this->getCurrentColor()));
+bool Board::isUnderAttack(Coords coords, Color color) {
+
 }
 
 

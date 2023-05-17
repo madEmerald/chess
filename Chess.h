@@ -34,6 +34,9 @@ private:
     Cell board[8][8];
 public:
     Cell getCell(Coords);
+    bool isLongCastlingPossible(Color);
+    bool isShortCastlingPossible(Color);
+    bool makeMove(Move);
     bool isUnderAttack(Coords, Color);
 };
 
@@ -42,17 +45,13 @@ private:
     Color currentColor;
     State currentState;
     std::set<Move> allPossibleMoves;
-    bool isLongCastlingPossible();
-    bool isShortCastlingPossible();
-    bool isUnderAttack(Coords);
-    Cell getCell(Coords);
     Board board;
 public:
     Color getCurrentColor();
     State getCurrentState();
     void newGame();
     std::set<Coords> getAvailableMoves(Coords);
-    bool makeMove(Coords, Coords);
+    bool makeMove(Move);
 };
 
 #endif //CHESS_CHESS_H
