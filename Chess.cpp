@@ -47,17 +47,19 @@ void Game::getAllPossibleMoves() {
 
     for (int i = 0; i < 64; ++i) {
         for (int j = 0; j < 64; ++j) {
-            Coords c1 = {i / 8, i % 8};
-            Coords c2 = {j / 8, j % 8};
+            if (i != j) {
+                Coords c1 = {i / 8, i % 8};
+                Coords c2 = {j / 8, j % 8};
 
-            Board b = this->board.clone();
-            Piece* piece = b.getCell(c1).getPiece();
-            if (piece == nullptr || piece->getColor() != this->currentColor)
-                continue;
+                Board b = this->board.clone();
+                Piece *piece = b.getCell(c1).getPiece();
+                if (piece == nullptr || piece->getColor() != this->currentColor)
+                    continue;
 
-            if (piece->makeMove(c2, b))
-                if (!b.isUnderAttack(b.getKingCoords(this->currentColor), oppositeColor(this->currentColor)))
-                    this->allPossibleMoves.insert({c1, c2});
+                if (piece->makeMove(c2, b))
+                    if (!b.isUnderAttack(b.getKingCoords(this->currentColor), oppositeColor(this->currentColor)))
+                        this->allPossibleMoves.insert({c1, c2});
+            }
         }
     }
 }
