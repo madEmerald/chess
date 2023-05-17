@@ -33,7 +33,7 @@ bool Game::makeMove(Move m) {
         return false;
 
     if (this->allPossibleMoves.count(m)) {
-        this->board.getCell(m.first).getPiece()->makeMove(m.second);
+        this->board.getCell(m.first).getPiece()->makeMove(m.second, this->board); //
         this->currentColor = oppositeColor(this->currentColor);
         this->updateStatus();
 
@@ -42,8 +42,39 @@ bool Game::makeMove(Move m) {
     return false;
 }
 
-void Game::updateStatus() {
+void Game::getAllPossibleMoves() {
+    this->allPossibleMoves.clear();
 
+    for (int i = 0; i < 64; ++i) {
+        for (int j = 0; j < 64; ++j) {
+            Coords c1 = {i / 8, i % 8};
+            Coords c2 = {j / 8, j % 8};
+
+            Board b = this->board.clone();
+            Piece* piece = b.getCell(c1).getPiece();
+            if (piece == nullptr || piece->getColor() != this->currentColor)
+                continue;
+
+            if (piece->makeMove(c2, b))
+                if (!b.isUnderAttack(b.getKingCoords(this->currentColor), oppositeColor(this->currentColor)))
+                    this->allPossibleMoves.insert({c1, c2});
+        }
+    }
+}
+
+void Game::updateStatus() {
+    this->getAllPossibleMoves();
+    this->currentState = State::Common;
+
+    if (this->board.isUnderAttack(this->board.getKingCoords(this->currentColor), this->currentColor))
+        this->currentState = State::Check;
+
+    if (this->allPossibleMoves.empty()) {
+        if (this->currentState == State::Check)
+            this->currentState = State::Mate;
+        else
+            this->currentState = State::Stalemate;
+    }
 }
 
 bool Board::isLongCastlingPossible(Color c) {
@@ -55,10 +86,10 @@ bool Board::isLongCastlingPossible(Color c) {
     if (king == nullptr || rook == nullptr)
         return false;
 
-    if (king->getType != PieceType::King || rook->getType != PieceType::Rook)
+    if (king->getType() != PieceType::King || rook->getType() != PieceType::Rook)
         return false;
 
-    if (king->getColor != c || rook->getColor != c)
+    if (king->getColor() != c || rook->getColor() != c)
         return false;
 
     if (king->isMoved() || rook->isMoved())
@@ -85,7 +116,10 @@ bool Board::isShortCastlingPossible(Color c) {
     if (king == nullptr || rook == nullptr)
         return false;
 
-    if (king->getType != PieceType::King || rook->getType != PieceType::Rook)
+    if (king->getType() != PieceType::King || rook->getType() != PieceType::Rook)
+        return false;
+
+    if (king->getColor() != c || rook->getColor() != c)
         return false;
 
     if (king->isMoved() || rook->isMoved())
@@ -111,6 +145,14 @@ Cell Board::getCell(Coords c) {
     return this->cells[c.first][c.second];
 }
 
+Board Board::clone() {
+    return Board();
+}
+
+Coords Board::getKingCoords(Color) {
+    return Coords();
+}
+
 Piece *Cell::getPiece() {
     return this->piece;
 }
@@ -119,11 +161,23 @@ bool Piece::isMoved() {
     return this->moved;
 }
 
-bool Piece::makeMove(Coords) {
+bool Piece::makeMove(Coords, Board) {
+    return false;
+}
+
+bool Piece::makeMove(Coords, Board, std::string&) {
     return false;
 }
 
 bool Piece::canMove() {
     return false;
+}
+
+PieceType Piece::getType() {
+    return PieceType::King;
+}
+
+Color Piece::getColor() {
+    return Color::Black;
 }
 

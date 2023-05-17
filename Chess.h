@@ -13,17 +13,19 @@
 using Coords = std::pair<int, int>;
 using Move = std::pair<Coords, Coords>;
 
+class Board;
 class Piece {
 private:
     PieceType type;
     Color color;
     bool moved;
 public:
-    PieceType getType;
-    Color getColor;
+    PieceType getType();
+    Color getColor();
     bool isMoved();
     bool canMove();
-    bool makeMove(Coords);
+    bool makeMove(Coords, Board);
+    bool makeMove(Coords, Board, std::string &);
 };
 
 class Cell {
@@ -36,11 +38,16 @@ public:
 class Board {
 private:
     Cell cells[8][8];
+    Cell enPassant;
+    Cell whiteKingCoords;
+    Cell blackKingCoords;
 public:
     Cell getCell(Coords);
     bool isLongCastlingPossible(Color);
     bool isShortCastlingPossible(Color);
     bool isUnderAttack(Coords, Color);
+    Board clone();
+    Coords getKingCoords(Color);
 };
 
 class Game : public BaseComponent {
@@ -49,6 +56,7 @@ private:
     State currentState;
     std::set<Move> allPossibleMoves;
     Board board;
+    void getAllPossibleMoves();
     void updateStatus();
 public:
     Color getCurrentColor();
