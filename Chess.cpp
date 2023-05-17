@@ -35,8 +35,8 @@ bool Game::makeMove(Move) {
 bool Board::isLongCastlingPossible(Color c) {
     int x = c == Color::Write ? 0 : 7;
 
-    Piece* king = this->getCell({x, 4}).getPiece();
-    Piece* rook = this->getCell({x, 0}).getPiece();
+    Piece *king = this->getCell({x, 4}).getPiece();
+    Piece *rook = this->getCell({x, 0}).getPiece();
 
     if (king == nullptr || rook == nullptr)
         return false;
@@ -54,7 +54,9 @@ bool Board::isLongCastlingPossible(Color c) {
         || this->getCell({x, 3}).getPiece())
         return false;
 
-    if (this->isUnderAttack({x, 4}, oppositeColor(c)) || this->isUnderAttack({x, 2}, oppositeColor(c)))
+    if (this->isUnderAttack({x, 4}, oppositeColor(c))
+        || this->isUnderAttack({x, 2}, oppositeColor(c))
+        || this->isUnderAttack({x, 3}, oppositeColor(c)))
         return false;
 
     return true;
@@ -63,8 +65,8 @@ bool Board::isLongCastlingPossible(Color c) {
 bool Board::isShortCastlingPossible(Color c) {
     int x = c == Color::Write ? 0 : 7;
 
-    Piece* king = this->getCell({x, 4}).getPiece();
-    Piece* rook = this->getCell({x, 7}).getPiece();
+    Piece *king = this->getCell({x, 4}).getPiece();
+    Piece *rook = this->getCell({x, 7}).getPiece();
 
     if (king == nullptr || rook == nullptr)
         return false;
@@ -78,7 +80,9 @@ bool Board::isShortCastlingPossible(Color c) {
     if (this->getCell({x, 5}).getPiece() != nullptr || this->getCell({x, 6}).getPiece())
         return false;
 
-    if (this->isUnderAttack({x, 4}, oppositeColor(c)) || this->isUnderAttack({x, 6}, oppositeColor(c)))
+    if (this->isUnderAttack({x, 4}, oppositeColor(c))
+        || this->isUnderAttack({x, 5}, oppositeColor(c))
+        || this->isUnderAttack({x, 6}, oppositeColor(c)))
         return false;
 
     return true;
@@ -105,6 +109,3 @@ Cell Board::getCell(Coords) {
     return Cell();
 }
 
-bool Board::isUnderAttack(Coords, Color) {
-    return false;
-}
