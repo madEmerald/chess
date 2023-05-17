@@ -22,6 +22,7 @@ public:
     PieceType getType;
     Color getColor;
     bool isMoved();
+    bool canMove();
     bool makeMove(Coords);
 };
 

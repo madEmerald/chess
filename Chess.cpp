@@ -29,6 +29,9 @@ std::set<Coords> Game::getAvailableMoves(Coords c) {
 }
 
 bool Game::makeMove(Move m) {
+    if (currentState == State::Mate || currentState == State::Stalemate)
+        return false;
+
     if (this->allPossibleMoves.count(m)) {
         this->board.getCell(m.first).getPiece()->makeMove(m.second);
         this->currentColor = oppositeColor(this->currentColor);
@@ -117,6 +120,10 @@ bool Piece::isMoved() {
 }
 
 bool Piece::makeMove(Coords) {
+    return false;
+}
+
+bool Piece::canMove() {
     return false;
 }
 
