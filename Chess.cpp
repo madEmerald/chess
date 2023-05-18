@@ -161,7 +161,8 @@ Board::Board(Cell (&cells)[8][8], Coords enPassant, Coords whiteKingCoords, Coor
 }
 
 Board Board::clone() {
-    return Board(this->cells_, this->enPassant_, this->whiteKingCoords_, this->blackKingCoords_);
+    return {this->cells_, this->enPassant_,
+            this->whiteKingCoords_, this->blackKingCoords_};
 }
 
 Coords Board::getKingCoords(Color c) {
