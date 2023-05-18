@@ -3,6 +3,7 @@
 //
 
 #include <algorithm>
+#include <utility>
 #include "Chess.h"
 
 Color oppositeColor(Color c) {
@@ -140,31 +141,54 @@ bool Board::isShortCastlingPossible(Color c) {
 
 bool Board::isUnderAttack(Coords coords, Color color) {
     for (int i = 0; i < 64; ++i) {
-        Piece* attacker = this->cells[i / 8][i % 8].getPiece();
+        Piece *attacker = this->cells_[i / 8][i % 8].getPiece();
         if (attacker != nullptr && attacker->getColor() != color && attacker->canMove(coords))
             return true;
     }
     return false;
 }
 
-
 Cell Board::getCell(Coords c) {
-    return this->cells[c.first][c.second];
+    return this->cells_[c.first][c.second];
+}
+
+Board::Board(Cell (&cells)[8][8], Coords enPassant, Coords whiteKingCoords, Coords blackKingCoords) :
+        enPassant_(std::move(enPassant)), whiteKingCoords_(std::move(whiteKingCoords)),
+        blackKingCoords_(std::move(blackKingCoords)) {
+    for (int i = 0; i < 8; ++i)
+        for (int j = 0; j < 8; ++j)
+            this->cells_[i][j] = cells[i][j].clone();
 }
 
 Board Board::clone() {
-    return Board();
+    return Board(this->cells_, this->enPassant_, this->whiteKingCoords_, this->blackKingCoords_);
 }
 
-Coords Board::getKingCoords(Color) {
-    return Coords();
+Coords Board::getKingCoords(Color c) {
+    return c == Color::Write ? this->whiteKingCoords_ : this->blackKingCoords_;
 }
 
 Piece *Cell::getPiece() {
     return this->piece;
 }
 
-bool Piece::isMoved() {
+void Cell::setPiece(Piece *p) {
+    this->piece = p;
+}
+
+Cell::Cell() {
+
+}
+
+Cell Cell::clone() {
+    Cell cell;
+    Piece p{*(this->piece)};
+    cell.setPiece(&p);
+
+    return cell;
+}
+
+bool Piece::isMoved() const {
     return this->moved;
 }
 
@@ -172,11 +196,11 @@ bool Piece::makeMove(Coords, Board) {
     return false;
 }
 
-bool Piece::makeMove(Coords, Board, std::string&) {
+bool Piece::makeMove(Coords, Board, std::string &) {
     return false;
 }
 
-bool Piece::canMove() {
+bool Piece::canMove(Coords) {
     return false;
 }
 
@@ -187,8 +211,3 @@ PieceType Piece::getType() {
 Color Piece::getColor() {
     return Color::Black;
 }
-
-bool Piece::canMove(Coords) {
-    return false;
-}
-

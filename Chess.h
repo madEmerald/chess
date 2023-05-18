@@ -22,7 +22,7 @@ private:
 public:
     PieceType getType();
     Color getColor();
-    bool isMoved();
+    bool isMoved() const;
     bool canMove(Coords);
     bool makeMove(Coords, Board);
     bool makeMove(Coords, Board, std::string &);
@@ -32,16 +32,21 @@ class Cell {
 private:
     Piece* piece;
 public:
+    Cell();
     Piece* getPiece();
+    void setPiece(Piece*);
+    Cell clone();
 };
 
 class Board {
 private:
-    Cell cells[8][8];
-    Cell enPassant;
-    Cell whiteKingCoords;
-    Cell blackKingCoords;
+    Cell cells_[8][8];
+    Coords enPassant_;
+    Coords whiteKingCoords_;
+    Coords blackKingCoords_;
+    Board(Cell (&cells)[8][8], Coords, Coords, Coords);
 public:
+    Board();
     Cell getCell(Coords);
     bool isLongCastlingPossible(Color);
     bool isShortCastlingPossible(Color);
