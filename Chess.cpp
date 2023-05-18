@@ -169,16 +169,16 @@ Coords Board::getKingCoords(Color c) {
     return c == Color::Write ? this->whiteKingCoords_ : this->blackKingCoords_;
 }
 
+Cell::Cell() {
+    this->piece = nullptr;
+}
+
 Piece *Cell::getPiece() {
     return this->piece;
 }
 
 void Cell::setPiece(Piece *p) {
     this->piece = p;
-}
-
-Cell::Cell() {
-
 }
 
 Cell Cell::clone() {
