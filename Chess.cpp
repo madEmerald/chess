@@ -212,3 +212,29 @@ PieceType Piece::getType() {
 Color Piece::getColor() {
     return Color::Black;
 }
+
+Piece::Piece(Color c) : color(c), moved(false) {}
+
+Rook::Rook(Color c) : Piece(c) {
+    this->type = PieceType::Rook;
+}
+
+Pawn::Pawn(Color c) : Piece(c) {
+    this->type = PieceType::Pawn;
+}
+
+Knight::Knight(Color c) : Piece(c) {
+    this->type = PieceType::Knight;
+}
+
+Bishop::Bishop(Color c) : Piece(c) {
+    this->type = PieceType::Bishop;
+}
+
+Queen::Queen(Color c) : Piece(c) {
+    this->type = PieceType::Queen;
+}
+
+King::King(Color c) : Piece(c) {
+    this->type = PieceType::King;
+}

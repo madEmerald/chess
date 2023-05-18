@@ -15,11 +15,12 @@ using Move = std::pair<Coords, Coords>;
 
 class Board;
 class Piece {
-private:
+protected:
     PieceType type;
     Color color;
     bool moved;
 public:
+    explicit Piece(Color c);
     PieceType getType();
     Color getColor();
     bool isMoved() const;
@@ -31,7 +32,7 @@ public:
 
 class Rook : private Piece {
 public:
-    Rook(Color);
+    explicit Rook(Color);
     virtual bool canMove(Coords);
     virtual bool makeMove(Coords, Board);
     virtual bool makeMove(Coords, Board, std::string &);
@@ -39,7 +40,7 @@ public:
 
 class Pawn : private Piece {
 public:
-    Rook(Color);
+    explicit Pawn(Color);
     virtual bool canMove(Coords);
     virtual bool makeMove(Coords, Board);
     virtual bool makeMove(Coords, Board, std::string &);
@@ -47,7 +48,7 @@ public:
 
 class Knight : private Piece {
 public:
-    Rook(Color);
+    explicit Knight(Color);
     virtual bool canMove(Coords);
     virtual bool makeMove(Coords, Board);
     virtual bool makeMove(Coords, Board, std::string &);
@@ -55,7 +56,7 @@ public:
 
 class Bishop : private Piece {
 public:
-    Rook(Color);
+    explicit Bishop(Color);
     virtual bool canMove(Coords);
     virtual bool makeMove(Coords, Board);
     virtual bool makeMove(Coords, Board, std::string &);
@@ -63,7 +64,7 @@ public:
 
 class Queen : private Piece {
 public:
-    Rook(Color);
+    explicit Queen(Color);
     virtual bool canMove(Coords);
     virtual bool makeMove(Coords, Board);
     virtual bool makeMove(Coords, Board, std::string &);
@@ -71,7 +72,7 @@ public:
 
 class King : private Piece {
 public:
-    Rook(Color);
+    explicit King(Color);
     virtual bool canMove(Coords);
     virtual bool makeMove(Coords, Board);
     virtual bool makeMove(Coords, Board, std::string &);
