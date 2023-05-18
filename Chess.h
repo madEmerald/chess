@@ -23,9 +23,58 @@ public:
     PieceType getType();
     Color getColor();
     bool isMoved() const;
-    bool canMove(Coords);
-    bool makeMove(Coords, Board);
-    bool makeMove(Coords, Board, std::string &);
+
+    virtual bool canMove(Coords) = 0;
+    virtual bool makeMove(Coords, Board) = 0;
+    virtual bool makeMove(Coords, Board, std::string &) = 0;
+};
+
+class Rook : private Piece {
+public:
+    Rook(Color);
+    virtual bool canMove(Coords);
+    virtual bool makeMove(Coords, Board);
+    virtual bool makeMove(Coords, Board, std::string &);
+};
+
+class Pawn : private Piece {
+public:
+    Rook(Color);
+    virtual bool canMove(Coords);
+    virtual bool makeMove(Coords, Board);
+    virtual bool makeMove(Coords, Board, std::string &);
+};
+
+class Knight : private Piece {
+public:
+    Rook(Color);
+    virtual bool canMove(Coords);
+    virtual bool makeMove(Coords, Board);
+    virtual bool makeMove(Coords, Board, std::string &);
+};
+
+class Bishop : private Piece {
+public:
+    Rook(Color);
+    virtual bool canMove(Coords);
+    virtual bool makeMove(Coords, Board);
+    virtual bool makeMove(Coords, Board, std::string &);
+};
+
+class Queen : private Piece {
+public:
+    Rook(Color);
+    virtual bool canMove(Coords);
+    virtual bool makeMove(Coords, Board);
+    virtual bool makeMove(Coords, Board, std::string &);
+};
+
+class King : private Piece {
+public:
+    Rook(Color);
+    virtual bool canMove(Coords);
+    virtual bool makeMove(Coords, Board);
+    virtual bool makeMove(Coords, Board, std::string &);
 };
 
 class Cell {

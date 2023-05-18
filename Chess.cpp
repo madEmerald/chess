@@ -193,15 +193,15 @@ bool Piece::isMoved() const {
     return this->moved;
 }
 
+bool Piece::canMove(Coords) {
+    return false;
+}
+
 bool Piece::makeMove(Coords, Board) {
     return false;
 }
 
 bool Piece::makeMove(Coords, Board, std::string &) {
-    return false;
-}
-
-bool Piece::canMove(Coords) {
     return false;
 }
 
