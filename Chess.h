@@ -46,7 +46,7 @@ public:
     Pawn* clone() override;
     bool canMove(Move, Board&) override;
     bool makeMove(Move, Board&) override;
-    virtual bool makeMove(Move, Board&, std::string &);
+    bool makeMove(Move, Board&, std::string &) override;
 };
 
 class Knight : private Piece {
