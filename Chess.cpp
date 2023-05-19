@@ -174,6 +174,14 @@ Coords Board::getKingCoords(Color c) {
     return c == Color::Write ? this->whiteKingCoords_ : this->blackKingCoords_;
 }
 
+Coords Board::getEnPassantCellCoords() {
+    return this->enPassant_;
+}
+
+bool Board::getPawnPromoting(PieceType &) {
+    return false;
+}
+
 Cell::Cell() {
     this->piece = nullptr;
 }
@@ -304,7 +312,48 @@ bool Pawn::canMove(Move m, Board &b) {
 
         return from.first + direction == to.first && (from.second + 1 == to.second || from.second - 1 == to.second);
     }
+}
 
+bool Pawn::makeMove(Move m, Board &b) {
+    if (canMove(m, b)) {
+        Coords from = m.first;
+        Coords to = m.second;
+        PieceType pawnPromoting = PieceType::Pawn;
+        if (to.first == 7 && this->color_ == Color::Write || to.first == 0 && this->color_ == Color::Black)
+            if (!b.getPawnPromoting(pawnPromoting))
+                return false;
+
+        if (b.getCell(to).getPiece() != nullptr)
+            delete b.getCell(to).getPiece();
+
+        b.getCell(from).setPiece(nullptr);
+        switch (pawnPromoting) {
+            case PieceType::Rook:
+                b.getCell(to).setPiece((Piece *) new Rook(this->color_));
+                delete this;
+                break;
+            case PieceType::Knight:
+                b.getCell(to).setPiece((Piece *) new Knight(this->color_));
+                delete this;
+                break;
+            case PieceType::Queen:
+                b.getCell(to).setPiece((Piece *) new Queen(this->color_));
+                delete this;
+                break;
+            case PieceType::Bishop:
+                b.getCell(to).setPiece((Piece *) new Bishop(this->color_));
+                delete this;
+                break;
+            default:
+                b.getCell(to).setPiece(this);
+        }
+
+        if (to == b.getEnPassantCellCoords())
+            delete b.getCell({from.first, to.second}).getPiece();
+
+        return true;
+    }
+    return false;
 }
 
 Knight::Knight(Color c) : Piece(c) {

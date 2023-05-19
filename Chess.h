@@ -44,8 +44,8 @@ class Pawn : private Piece {
 public:
     explicit Pawn(Color);
     Pawn* clone() override;
-    virtual bool canMove(Move, Board&);
-    virtual bool makeMove(Move, Board&);
+    bool canMove(Move, Board&) override;
+    bool makeMove(Move, Board&) override;
     virtual bool makeMove(Move, Board&, std::string &);
 };
 
@@ -104,6 +104,8 @@ public:
     bool isUnderAttack(Coords, Color);
     Board clone();
     Coords getKingCoords(Color);
+    Coords getEnPassantCellCoords();
+    virtual bool getPawnPromoting(PieceType&);
 };
 
 class Game : public BaseComponent {
