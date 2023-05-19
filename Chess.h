@@ -67,9 +67,7 @@ class Queen : private Piece {
 public:
     explicit Queen(Color);
     Queen* clone() override;
-    virtual bool canMove(Move, Board&);
-    virtual bool makeMove(Move, Board&);
-    virtual bool makeMove(Move, Board&, std::string &);
+    bool canMove(Move, Board&) override;
 };
 
 class King : private Piece {

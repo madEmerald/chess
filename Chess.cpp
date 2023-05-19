@@ -351,6 +351,10 @@ Queen *Queen::clone() {
     return ptr;
 }
 
+bool Queen::canMove(Move m, Board &b) {
+    return Rook(this->color_).canMove(m, b) || Bishop(this->color_).canMove(m, b);
+}
+
 King::King(Color c) : Piece(c) {
     this->type_ = PieceType::King;
 }
