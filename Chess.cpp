@@ -256,14 +256,14 @@ bool Rook::canMove(Move m, Board &b) {
     if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
         return false;
 
-    int step = to.first >= from.first ? 1 : -1;
-    for (int i = from.first + step; i < to.first; i + step) {
+    int direction = to.first >= from.first ? 1 : -1;
+    for (int i = from.first + direction; i < to.first; i += direction) {
         if (b.getCell({i, from.second}).getPiece() != nullptr)
             return false;
     }
 
-    step = to.second >= from.second ? 1 : -1;
-    for (int j = from.second + step; j < to.second; j + step) {
+    direction = to.second >= from.second ? 1 : -1;
+    for (int j = from.second + direction; j < to.second; j += direction) {
         if (b.getCell({from.first, j}).getPiece() != nullptr)
             return false;
     }
@@ -279,6 +279,32 @@ Pawn *Pawn::clone() {
     auto *ptr = new Pawn(this->color_);
     ptr->setMoved(this->moved_);
     return ptr;
+}
+
+bool Pawn::canMove(Move m, Board &b) {
+    Coords from = m.first;
+    Coords to = m.second;
+    if (from == to)
+        return false;
+
+    int direction = this->color_ == Color::Write ? 1 : -1;
+    Piece *target = b.getCell(to).getPiece();
+    if (target == nullptr) {
+        if (from.second != to.second)
+            return false;
+
+        if (from.first + direction == to.first)
+            return true;
+
+        return !this->moved_ && from.first + direction * 2 == to.first &&
+               b.getCell({from.first + direction, from.second}).getPiece() == nullptr;
+    } else {
+        if (target->getColor() == this->color_)
+            return false;
+
+        return from.first + direction == to.first && (from.second + 1 == to.second || from.second - 1 == to.second);
+    }
+
 }
 
 Knight::Knight(Color c) : Piece(c) {
@@ -300,7 +326,7 @@ bool Knight::canMove(Move m, Board &b) {
     if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
         return false;
 
-    return (Coords){2, 1} == (Coords){abs(from.first - to.first), abs(from.second - to.second)};
+    return (Coords) {2, 1} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)};
 }
 
 Bishop::Bishop(Color c) : Piece(c) {
@@ -325,17 +351,17 @@ bool Bishop::canMove(Move m, Board &b) {
     if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
         return false;
 
-    int startRow, step;
+    int startRow, direction;
     if (to.second > from.second) {
-        step = to.first > from.first ? 1 :-1;
+        direction = to.first > from.first ? 1 : -1;
         startRow = from.first;
     } else {
-        step = to.first < from.first ? 1 :-1;
+        direction = to.first < from.first ? 1 : -1;
         startRow = to.first;
     }
 
     for (int i = 1; std::min(from.second, to.second) + i < std::max(from.second, to.second); ++i)
-        if (b.getCell({startRow + i * step, i}).getPiece() != nullptr)
+        if (b.getCell({startRow + i * direction, i}).getPiece() != nullptr)
             return false;
 
     return false;
