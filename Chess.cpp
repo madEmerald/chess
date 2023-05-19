@@ -197,18 +197,6 @@ bool Piece::isMoved() const {
     return this->moved_;
 }
 
-bool Piece::canMove(Move, Board&) {
-    return false;
-}
-
-bool Piece::makeMove(Move, Board&) {
-    return false;
-}
-
-bool Piece::makeMove(Move, Board&, std::string &) {
-    return false;
-}
-
 PieceType Piece::getType() {
     return this->type_;
 }
@@ -224,6 +212,27 @@ void Piece::setMoved(bool moved) {
 }
 
 Piece::~Piece() = default;
+
+bool Piece::makeMove(Move m, Board &b) {
+    if (canMove(m, b)) {
+        if (b.getCell(m.second).getPiece() != nullptr) {
+            delete b.getCell(m.second).getPiece();
+        }
+        b.getCell(m.second).setPiece(this);
+        b.getCell(m.first).setPiece(nullptr);
+
+        return true;
+    }
+    return false;
+}
+
+bool Piece::makeMove(Move m, Board &b, std::string &s) {
+    if (canMove(m, b)) {
+        s = toChessNotation(m);
+        return true;
+    }
+    return false;
+}
 
 Rook::Rook(Color c) : Piece(c) {
     this->type_ = PieceType::Rook;

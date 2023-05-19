@@ -29,8 +29,8 @@ public:
 
     virtual Piece* clone() = 0;
     virtual bool canMove(Move, Board&) = 0;
-    virtual bool makeMove(Move, Board&) = 0;
-    virtual bool makeMove(Move, Board&, std::string &) = 0;
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Rook : private Piece {
@@ -38,8 +38,6 @@ public:
     explicit Rook(Color);
     Rook* clone() override;
     bool canMove(Move, Board&) override;
-    bool makeMove(Move, Board&) override;
-    bool makeMove(Move, Board&, std::string &) override;
 };
 
 class Pawn : private Piece {
@@ -55,9 +53,7 @@ class Knight : private Piece {
 public:
     explicit Knight(Color);
     Knight* clone() override;
-    virtual bool canMove(Move, Board&);
-    virtual bool makeMove(Move, Board&);
-    virtual bool makeMove(Move, Board&, std::string &);
+    bool canMove(Move, Board&) override;
 };
 
 class Bishop : private Piece {
