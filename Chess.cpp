@@ -271,27 +271,6 @@ bool Rook::canMove(Move m, Board &b) {
     return false;
 }
 
-bool Rook::makeMove(Move m, Board &b) {
-    if (canMove(m, b)) {
-        if (b.getCell(m.second).getPiece() != nullptr) {
-            delete b.getCell(m.second).getPiece();
-        }
-        b.getCell(m.second).setPiece(this);
-        b.getCell(m.first).setPiece(nullptr);
-
-        return true;
-    }
-    return false;
-}
-
-bool Rook::makeMove(Move m, Board &b, std::string &s) {
-    if (canMove(m, b)) {
-        s = toChessNotation(m);
-        return true;
-    }
-    return false;
-}
-
 Pawn::Pawn(Color c) : Piece(c) {
     this->type_ = PieceType::Pawn;
 }
@@ -323,28 +302,6 @@ bool Knight::canMove(Move m, Board &b) {
 
     return (Coords){2, 1} == (Coords){abs(from.first - to.first), abs(from.second - to.second)};
 }
-
-bool Knight::makeMove(Move m, Board &b) {
-    if (canMove(m, b)) {
-        if (b.getCell(m.second).getPiece() != nullptr) {
-            delete b.getCell(m.second).getPiece();
-        }
-        b.getCell(m.second).setPiece(this);
-        b.getCell(m.first).setPiece(nullptr);
-
-        return true;
-    }
-    return false;
-}
-
-bool Knight::makeMove(Move m, Board &b, std::string &s) {
-    if (canMove(m, b)) {
-        s = toChessNotation(m);
-        return true;
-    }
-    return false;
-}
-
 
 Bishop::Bishop(Color c) : Piece(c) {
     this->type_ = PieceType::Bishop;
