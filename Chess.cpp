@@ -303,6 +303,40 @@ Knight *Knight::clone() {
     return ptr;
 }
 
+bool Knight::canMove(Move m, Board &b) {
+    Coords from = m.first;
+    Coords to = m.second;
+    if (m.first != m.second)
+        return false;
+
+    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+        return false;
+
+    return (Coords){2, 1} == (Coords){abs(from.first - to.first), abs(from.second - to.second)};
+}
+
+bool Knight::makeMove(Move m, Board &b) {
+    if (canMove(m, b)) {
+        if (b.getCell(m.second).getPiece() != nullptr) {
+            delete b.getCell(m.second).getPiece();
+        }
+        b.getCell(m.second).setPiece(this);
+        b.getCell(m.first).setPiece(nullptr);
+
+        return true;
+    }
+    return false;
+}
+
+bool Knight::makeMove(Move m, Board &b, std::string &s) {
+    if (canMove(m, b)) {
+        s = toChessNotation(m);
+        return true;
+    }
+    return false;
+}
+
+
 Bishop::Bishop(Color c) : Piece(c) {
     this->type_ = PieceType::Bishop;
 }
