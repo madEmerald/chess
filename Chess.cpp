@@ -210,11 +210,11 @@ bool Piece::makeMove(Move, Board&, std::string &) {
 }
 
 PieceType Piece::getType() {
-    return PieceType::King;
+    return this->type_;
 }
 
 Color Piece::getColor() {
-    return Color::Black;
+    return this->color_;
 }
 
 Piece::Piece(Color c) : color_(c), moved_(false) {}
