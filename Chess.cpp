@@ -229,6 +229,33 @@ Rook *Rook::clone() {
     return ptr;
 }
 
+bool Rook::canMove(Move m, Board &b) {
+    Coords from = m.first;
+    Coords to = m.second;
+    if (m.first != m.second)
+        return false;
+
+    if (from.first != to.first && from.second != to.second)
+        return false;
+
+    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+        return false;
+
+    int step = to.first >= from.first ? 1 : -1;
+    for (int i = from.first + step; i < to.first; i + step) {
+        if (b.getCell({i, from.second}).getPiece() != nullptr)
+            return false;
+    }
+
+    step = to.second >= from.second ? 1 : -1;
+    for (int j = from.second + step; j < to.second; j + step) {
+        if (b.getCell({from.first, j}).getPiece() != nullptr)
+            return false;
+    }
+
+    return false;
+}
+
 Pawn::Pawn(Color c) : Piece(c) {
     this->type_ = PieceType::Pawn;
 }
