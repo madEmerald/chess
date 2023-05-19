@@ -10,6 +10,10 @@ Color oppositeColor(Color c) {
     return c == Color::Write ? Color::Black : Color::Write;
 }
 
+std::string toChessNotation(Move) {
+
+}
+
 Color Game::getCurrentColor() {
     return this->currentColor;
 }
@@ -219,6 +223,8 @@ void Piece::setMoved(bool moved) {
     this->moved_ = moved;
 }
 
+Piece::~Piece() = default;
+
 Rook::Rook(Color c) : Piece(c) {
     this->type_ = PieceType::Rook;
 }
@@ -253,6 +259,27 @@ bool Rook::canMove(Move m, Board &b) {
             return false;
     }
 
+    return false;
+}
+
+bool Rook::makeMove(Move m, Board &b) {
+    if (canMove(m, b)) {
+        if (b.getCell(m.second).getPiece() != nullptr) {
+            delete b.getCell(m.second).getPiece();
+        }
+        b.getCell(m.second).setPiece(this);
+        b.getCell(m.first).setPiece(nullptr);
+
+        return true;
+    }
+    return false;
+}
+
+bool Rook::makeMove(Move m, Board &b, std::string &s) {
+    if (canMove(m, b)) {
+        s = toChessNotation(m);
+        return true;
+    }
     return false;
 }
 

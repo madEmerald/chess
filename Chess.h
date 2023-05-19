@@ -22,6 +22,7 @@ protected:
     explicit Piece(Color);
     void setMoved(bool);
 public:
+    ~Piece();
     PieceType getType();
     Color getColor();
     [[nodiscard]] bool isMoved() const;
@@ -36,9 +37,9 @@ class Rook : private Piece {
 public:
     explicit Rook(Color);
     Rook* clone() override;
-    virtual bool canMove(Move, Board&);
-    virtual bool makeMove(Move, Board&);
-    virtual bool makeMove(Move, Board&, std::string &);
+    bool canMove(Move, Board&) override;
+    bool makeMove(Move, Board&) override;
+    bool makeMove(Move, Board&, std::string &) override;
 };
 
 class Pawn : private Piece {
