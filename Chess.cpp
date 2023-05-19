@@ -183,13 +183,14 @@ void Cell::setPiece(Piece *p) {
 
 Cell Cell::clone() {
     Cell cell;
-    cell.setPiece(this->getPiece()->clone());
+    Piece p{*(this->piece)};
+    cell.setPiece(&p);
 
     return cell;
 }
 
 bool Piece::isMoved() const {
-    return this->moved_;
+    return this->moved;
 }
 
 bool Piece::canMove(Coords) {
@@ -212,68 +213,28 @@ Color Piece::getColor() {
     return Color::Black;
 }
 
-Piece::Piece(Color c) : color_(c), moved_(false) {}
-
-void Piece::setMoved(bool moved) {
-    this->moved_ = moved;
-}
+Piece::Piece(Color c) : color(c), moved(false) {}
 
 Rook::Rook(Color c) : Piece(c) {
-    this->type_ = PieceType::Rook;
-}
-
-Rook *Rook::clone() {
-    auto *ptr = new Rook(this->color_);
-    ptr->setMoved(this->moved_);
-    return ptr;
+    this->type = PieceType::Rook;
 }
 
 Pawn::Pawn(Color c) : Piece(c) {
-    this->type_ = PieceType::Pawn;
-}
-
-Pawn *Pawn::clone() {
-    auto *ptr = new Pawn(this->color_);
-    ptr->setMoved(this->moved_);
-    return ptr;
+    this->type = PieceType::Pawn;
 }
 
 Knight::Knight(Color c) : Piece(c) {
-    this->type_ = PieceType::Knight;
-}
-
-Knight *Knight::clone() {
-    auto *ptr = new Knight(this->color_);
-    ptr->setMoved(this->moved_);
-    return ptr;
+    this->type = PieceType::Knight;
 }
 
 Bishop::Bishop(Color c) : Piece(c) {
-    this->type_ = PieceType::Bishop;
-}
-
-Bishop *Bishop::clone() {
-    auto *ptr = new Bishop(this->color_);
-    ptr->setMoved(this->moved_);
-    return ptr;
+    this->type = PieceType::Bishop;
 }
 
 Queen::Queen(Color c) : Piece(c) {
-    this->type_ = PieceType::Queen;
-}
-
-Queen *Queen::clone() {
-    auto *ptr = new Queen(this->color_);
-    ptr->setMoved(this->moved_);
-    return ptr;
+    this->type = PieceType::Queen;
 }
 
 King::King(Color c) : Piece(c) {
-    this->type_ = PieceType::King;
-}
-
-King *King::clone() {
-    auto *ptr = new King(this->color_);
-    ptr->setMoved(this->moved_);
-    return ptr;
+    this->type = PieceType::King;
 }
