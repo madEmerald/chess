@@ -295,6 +295,9 @@ bool Pawn::canMove(Move m, Board &b) {
     int direction = this->color_ == Color::Write ? 1 : -1;
     Piece *target = b.getCell(to).getPiece();
     if (target == nullptr) {
+        if (b.getEnPassantCellCoords() == to)
+            return true;
+
         if (from.second != to.second)
             return false;
 
