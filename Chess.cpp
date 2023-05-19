@@ -247,7 +247,7 @@ Rook *Rook::clone() {
 bool Rook::canMove(Move m, Board &b) {
     Coords from = m.first;
     Coords to = m.second;
-    if (m.first != m.second)
+    if (from == to)
         return false;
 
     if (from.first != to.first && from.second != to.second)
@@ -268,7 +268,7 @@ bool Rook::canMove(Move m, Board &b) {
             return false;
     }
 
-    return false;
+    return true;
 }
 
 Pawn::Pawn(Color c) : Piece(c) {
@@ -294,7 +294,7 @@ Knight *Knight::clone() {
 bool Knight::canMove(Move m, Board &b) {
     Coords from = m.first;
     Coords to = m.second;
-    if (m.first != m.second)
+    if (from == to)
         return false;
 
     if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
@@ -311,6 +311,34 @@ Bishop *Bishop::clone() {
     auto *ptr = new Bishop(this->color_);
     ptr->setMoved(this->moved_);
     return ptr;
+}
+
+bool Bishop::canMove(Move m, Board &b) {
+    Coords from = m.first;
+    Coords to = m.second;
+    if (from == to)
+        return false;
+
+    if (abs(from.second - to.second) != (from.first - to.first))
+        return false;
+
+    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+        return false;
+
+    int startRow, step;
+    if (to.second > from.second) {
+        step = to.first > from.first ? 1 :-1;
+        startRow = from.first;
+    } else {
+        step = to.first < from.first ? 1 :-1;
+        startRow = to.first;
+    }
+
+    for (int i = 1; std::min(from.second, to.second) + i < std::max(from.second, to.second); ++i)
+        if (b.getCell({startRow + i * step, i}).getPiece() != nullptr)
+            return false;
+
+    return false;
 }
 
 Queen::Queen(Color c) : Piece(c) {
