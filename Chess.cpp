@@ -34,7 +34,7 @@ bool Game::makeMove(Move m) {
         return false;
 
     if (this->allPossibleMoves.count(m)) {
-        this->board.getCell(m.first).getPiece()->makeMove(m.second, this->board); //
+        this->board.getCell(m.first).getPiece()->makeMove(m, this->board); //
         this->currentColor = oppositeColor(this->currentColor);
         this->updateStatus();
 
@@ -57,7 +57,7 @@ void Game::getAllPossibleMoves() {
                 if (piece == nullptr || piece->getColor() != this->currentColor)
                     continue;
 
-                if (piece->makeMove(c2, b))
+                if (piece->makeMove({c1, c2}, b))
                     if (!b.isUnderAttack(b.getKingCoords(this->currentColor), oppositeColor(this->currentColor)))
                         this->allPossibleMoves.insert({c1, c2});
             }
@@ -139,10 +139,11 @@ bool Board::isShortCastlingPossible(Color c) {
     return true;
 }
 
-bool Board::isUnderAttack(Coords coords, Color color) {
+bool Board::isUnderAttack(Coords to, Color color) {
     for (int i = 0; i < 64; ++i) {
+        Coords from = {i / 8, i % 8};
         Piece *attacker = this->cells_[i / 8][i % 8].getPiece();
-        if (attacker != nullptr && attacker->getColor() != color && attacker->canMove(coords))
+        if (attacker != nullptr && attacker->getColor() != color && attacker->canMove({from, to}, *this))
             return true;
     }
     return false;
@@ -192,15 +193,15 @@ bool Piece::isMoved() const {
     return this->moved_;
 }
 
-bool Piece::canMove(Coords) {
+bool Piece::canMove(Move, Board&) {
     return false;
 }
 
-bool Piece::makeMove(Coords, Board) {
+bool Piece::makeMove(Move, Board&) {
     return false;
 }
 
-bool Piece::makeMove(Coords, Board, std::string &) {
+bool Piece::makeMove(Move, Board&, std::string &) {
     return false;
 }
 

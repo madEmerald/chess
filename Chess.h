@@ -27,63 +27,63 @@ public:
     [[nodiscard]] bool isMoved() const;
 
     virtual Piece* clone() = 0;
-    virtual bool canMove(Coords) = 0;
-    virtual bool makeMove(Coords, Board) = 0;
-    virtual bool makeMove(Coords, Board, std::string &) = 0;
+    virtual bool canMove(Move, Board&) = 0;
+    virtual bool makeMove(Move, Board&) = 0;
+    virtual bool makeMove(Move, Board&, std::string &) = 0;
 };
 
 class Rook : private Piece {
 public:
     explicit Rook(Color);
     Rook* clone() override;
-    virtual bool canMove(Coords);
-    virtual bool makeMove(Coords, Board);
-    virtual bool makeMove(Coords, Board, std::string &);
+    virtual bool canMove(Move, Board&);
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Pawn : private Piece {
 public:
     explicit Pawn(Color);
     Pawn* clone() override;
-    virtual bool canMove(Coords);
-    virtual bool makeMove(Coords, Board);
-    virtual bool makeMove(Coords, Board, std::string &);
+    virtual bool canMove(Move, Board&);
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Knight : private Piece {
 public:
     explicit Knight(Color);
     Knight* clone() override;
-    virtual bool canMove(Coords);
-    virtual bool makeMove(Coords, Board);
-    virtual bool makeMove(Coords, Board, std::string &);
+    virtual bool canMove(Move, Board&);
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Bishop : private Piece {
 public:
     explicit Bishop(Color);
     Bishop* clone() override;
-    virtual bool canMove(Coords);
-    virtual bool makeMove(Coords, Board);
-    virtual bool makeMove(Coords, Board, std::string &);
+    virtual bool canMove(Move, Board&);
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Queen : private Piece {
 public:
     explicit Queen(Color);
     Queen* clone() override;
-    virtual bool canMove(Coords);
-    virtual bool makeMove(Coords, Board);
-    virtual bool makeMove(Coords, Board, std::string &);
+    virtual bool canMove(Move, Board&);
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class King : private Piece {
 public:
     explicit King(Color);
     King* clone() override;
-    virtual bool canMove(Coords);
-    virtual bool makeMove(Coords, Board);
-    virtual bool makeMove(Coords, Board, std::string &);
+    virtual bool canMove(Move, Board&);
+    virtual bool makeMove(Move, Board&);
+    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Cell {
