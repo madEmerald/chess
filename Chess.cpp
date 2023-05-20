@@ -186,6 +186,13 @@ void Board::setEnPassantCellCoords(Coords c) {
     this->enPassant_ = c;
 }
 
+void Board::setKingCoords(Coords coords, Color color) {
+    if (color == Color::Write)
+        this->whiteKingCoords_ = coords;
+    else
+        this->blackKingCoords_ = coords;
+}
+
 Cell::Cell() {
     this->piece = nullptr;
 }
@@ -531,6 +538,7 @@ bool King::canMove(Move m, Board &b) {
 bool King::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
         b.getCell(m.first).getPiece()->setMoved(true);
+        b.setKingCoords(m.second, this->color_);
 
         int x = this->color_ == Color::Write ? 0 : 7;
         if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {
@@ -565,6 +573,7 @@ bool King::makeMove(Move m, Board &b) {
 bool King::makeMove(Move m, Board &b, std::string &s) {
     if (canMove(m, b)) {
         b.getCell(m.first).getPiece()->setMoved(true);
+        b.setKingCoords(m.second, this->color_);
 
         int x = this->color_ == Color::Write ? 0 : 7;
         if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {

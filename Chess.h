@@ -103,6 +103,7 @@ public:
     bool isShortCastlingPossible(Color);
     bool isUnderAttack(Coords, Color);
     Board clone();
+    void setKingCoords(Coords, Color);
     void setEnPassantCellCoords(Coords);
     Coords getKingCoords(Color);
     Coords getEnPassantCellCoords();
