@@ -488,3 +488,26 @@ King *King::clone() {
     ptr->setMoved(this->moved_);
     return ptr;
 }
+
+bool King::canMove(Move m, Board &b) {
+    Coords from = m.first;
+    Coords to = m.second;
+    if (from == to)
+        return false;
+
+    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+        return false;
+
+    int x = this->color_ == Color::Write ? 0 : 7;
+    if (from == (Coords) {x, 4} && to == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_))
+        return true;
+
+    if (from == (Coords) {x, 4} && to == (Coords) {x, 6} && b.isShortCastlingPossible(this->color_))
+        return true;
+
+    return (Coords) {0, 1} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)} ||
+           (Coords) {1, 0} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)} ||
+           (Coords) {1, 1} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)};
+}
+
+
