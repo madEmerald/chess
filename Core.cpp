@@ -22,7 +22,7 @@ std::set<Coords> Core::getAvailableMoves(Coords c) {
 }
 
 bool Core::makeMove(Coords from, Coords to) {
-    return this->game_->makeMove(from, to);
+    return this->game_->makeMove({from, to});
 }
 
 bool Core::getPawnPromoting(PieceType& pieceType) {
