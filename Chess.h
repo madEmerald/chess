@@ -20,11 +20,11 @@ protected:
     Color color_;
     bool moved_;
     explicit Piece(Color);
-    void setMoved(bool);
 public:
     ~Piece();
     PieceType getType();
     Color getColor();
+    void setMoved(bool);
     [[nodiscard]] bool isMoved() const;
 
     virtual Piece* clone() = 0;
