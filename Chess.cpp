@@ -318,6 +318,8 @@ bool Pawn::canMove(Move m, Board &b) {
 
 bool Pawn::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
+        b.getCell(m.first).getPiece()->setMoved(true);
+
         Coords from = m.first;
         Coords to = m.second;
         PieceType pawnPromoting = PieceType::Pawn;
@@ -360,6 +362,8 @@ bool Pawn::makeMove(Move m, Board &b) {
 
 bool Pawn::makeMove(Move m, Board &b, std::string &s) {
     if (canMove(m, b)) {
+        b.getCell(m.first).getPiece()->setMoved(true);
+
         Coords from = m.first;
         Coords to = m.second;
         PieceType pawnPromoting = PieceType::Pawn;
