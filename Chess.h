@@ -75,8 +75,8 @@ public:
     explicit King(Color);
     King* clone() override;
     bool canMove(Move, Board&) override;
-    virtual bool makeMove(Move, Board&);
-    virtual bool makeMove(Move, Board&, std::string &);
+    bool makeMove(Move, Board&) override;
+    bool makeMove(Move, Board&, std::string &) override;
 };
 
 class Cell {
