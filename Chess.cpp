@@ -83,7 +83,7 @@ Game::Game() {
 }
 
 Cell Game::getCell(Coords c) {
-    this->board->getCell(c);
+    return this->board->getCell(c);
 }
 
 bool Game::isLongCastlingPossible(Color c) {
