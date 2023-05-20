@@ -25,6 +25,18 @@ bool Core::makeMove(Coords from, Coords to) {
     return this->game_->makeMove(from, to);
 }
 
-void Core::choosePawnPromoting(std::string& s) {
+bool Core::getPawnPromoting(PieceType& pieceType) {
+    std::string s;
     this->interface_->choosePawnPromoting(s);
+    if (s == "B") {
+        pieceType = PieceType::Bishop;
+    } else if (s == "Kn") {
+        pieceType = PieceType::Knight;
+    } else if (s == "R") {
+        pieceType = PieceType::Rook;
+    } else if (s == "Q") {
+        pieceType = PieceType::Queen;
+    }
+
+    return s == "";
 }

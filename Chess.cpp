@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <utility>
 #include "Chess.h"
+#include "Core.h"
 
 Color oppositeColor(Color c) {
     return c == Color::Write ? Color::Black : Color::Write;
@@ -119,7 +120,7 @@ Coords Game::getEnPassantCellCoords() {
 }
 
 bool Game::getPawnPromoting(PieceType &pieceType) {
-    return this->board->getPawnPromoting(pieceType);
+    return this->core_->getPawnPromoting(pieceType);
 }
 
 bool Board::isLongCastlingPossible(Color c) {
@@ -217,7 +218,7 @@ Coords Board::getEnPassantCellCoords() {
 }
 
 bool Board::getPawnPromoting(PieceType &) {
-    return false;
+    return true;
 }
 
 void Board::setEnPassantCellCoords(Coords c) {

@@ -27,7 +27,7 @@ public:
 
     bool makeMove(Coords, Coords);
 
-    void choosePawnPromoting(std::string&);
+    bool getPawnPromoting(PieceType&);
 };
 
 #endif //CHESS_CORE_H
