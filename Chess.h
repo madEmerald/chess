@@ -96,7 +96,6 @@ private:
     Board(Cell (&cells)[8][8], Coords, Coords, Coords);
 public:
     Board();
-    ~Board();
     Cell getCell(Coords);
     bool isLongCastlingPossible(Color);
     bool isShortCastlingPossible(Color);
