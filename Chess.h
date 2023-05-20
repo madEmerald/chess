@@ -81,6 +81,7 @@ private:
     Piece* piece;
 public:
     Cell();
+    ~Cell();
     Piece* getPiece();
     void setPiece(Piece*);
     Cell clone();
@@ -95,6 +96,7 @@ private:
     Board(Cell (&cells)[8][8], Coords, Coords, Coords);
 public:
     Board();
+    ~Board();
     Cell getCell(Coords);
     bool isLongCastlingPossible(Color);
     bool isShortCastlingPossible(Color);

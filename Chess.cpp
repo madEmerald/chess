@@ -245,6 +245,10 @@ Cell Cell::clone() {
     return cell;
 }
 
+Cell::~Cell() {
+    delete this->piece;
+}
+
 bool Piece::isMoved() const {
     return this->moved_;
 }
