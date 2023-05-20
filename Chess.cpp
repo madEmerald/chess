@@ -76,6 +76,12 @@ void Game::updateStatus() {
     }
 }
 
+Game::Game() {
+    this->board = Board();
+    this->currentColor = Color::Write;
+    this->currentState = State::Common;
+}
+
 bool Board::isLongCastlingPossible(Color c) {
     int x = c == Color::Write ? 0 : 7;
 
