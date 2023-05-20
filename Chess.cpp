@@ -182,6 +182,10 @@ bool Board::getPawnPromoting(PieceType &) {
     return false;
 }
 
+void Board::setEnPassantCellCoords(Coords c) {
+    this->enPassant_ = c;
+}
+
 Cell::Cell() {
     this->piece = nullptr;
 }
@@ -322,6 +326,10 @@ bool Pawn::makeMove(Move m, Board &b) {
 
         Coords from = m.first;
         Coords to = m.second;
+        int direction = this->color_ == Color::Write ? 1 : -1;
+        if (!this->moved_ && from.first + direction * 2 == to.first)
+            b.setEnPassantCellCoords(to);
+
         PieceType pawnPromoting = PieceType::Pawn;
         if (to.first == 7 && this->color_ == Color::Write || to.first == 0 && this->color_ == Color::Black)
             if (!b.getPawnPromoting(pawnPromoting))
@@ -366,6 +374,10 @@ bool Pawn::makeMove(Move m, Board &b, std::string &s) {
 
         Coords from = m.first;
         Coords to = m.second;
+        int direction = this->color_ == Color::Write ? 1 : -1;
+        if (!this->moved_ && from.first + direction * 2 == to.first)
+            b.setEnPassantCellCoords(to);
+
         PieceType pawnPromoting = PieceType::Pawn;
         if (to.first == 7 && this->color_ == Color::Write || to.first == 0 && this->color_ == Color::Black)
             if (!b.getPawnPromoting(pawnPromoting))
