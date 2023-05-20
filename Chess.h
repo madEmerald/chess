@@ -30,7 +30,6 @@ public:
     virtual Piece* clone() = 0;
     virtual bool canMove(Move, Board&) = 0;
     virtual bool makeMove(Move, Board&);
-    virtual bool makeMove(Move, Board&, std::string &);
 };
 
 class Rook : private Piece {
@@ -46,7 +45,6 @@ public:
     Pawn* clone() override;
     bool canMove(Move, Board&) override;
     bool makeMove(Move, Board&) override;
-    bool makeMove(Move, Board&, std::string &) override;
 };
 
 class Knight : private Piece {
@@ -76,7 +74,6 @@ public:
     King* clone() override;
     bool canMove(Move, Board&) override;
     bool makeMove(Move, Board&) override;
-    bool makeMove(Move, Board&, std::string &) override;
 };
 
 class Cell {
@@ -119,9 +116,9 @@ private:
     void getAllPossibleMoves();
     void updateStatus();
 public:
+    Game();
     Color getCurrentColor();
     State getCurrentState();
-    void newGame();
     std::set<Coords> getAvailableMoves(Coords);
     bool makeMove(Move);
 };

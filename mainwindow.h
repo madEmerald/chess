@@ -25,14 +25,9 @@ public:
 
     void showInfo();
 
-    void addMoveToHistory(const QString &);
-
     ~MainWindow() override;
 
 public slots:
-
-    void newGame();
-
     void choosePawnPromoting(std::string&);
 
 private:

@@ -10,20 +10,12 @@ Color oppositeColor(Color c) {
     return c == Color::Write ? Color::Black : Color::Write;
 }
 
-std::string toChessNotation(Move) {
-
-}
-
 Color Game::getCurrentColor() {
     return this->currentColor;
 }
 
 State Game::getCurrentState() {
     return this->currentState;
-}
-
-void Game::newGame() {
-
 }
 
 std::set<Coords> Game::getAvailableMoves(Coords c) {
@@ -193,6 +185,41 @@ void Board::setKingCoords(Coords coords, Color color) {
         this->blackKingCoords_ = coords;
 }
 
+Board::Board() {
+    for (auto & cell : this->cells_) {
+        for (auto & j : cell) {
+            j = Cell();
+        }
+    }
+
+    this->getCell({7, 0}).setPiece((Piece*) new Rook(Color::Black));
+    this->getCell({7, 1}).setPiece((Piece*) new Knight(Color::Black));
+    this->getCell({7, 2}).setPiece((Piece*) new Bishop(Color::Black));
+    this->getCell({7, 3}).setPiece((Piece*) new Queen(Color::Black));
+    this->getCell({7, 4}).setPiece((Piece*) new King(Color::Black));
+    this->getCell({7, 5}).setPiece((Piece*) new Bishop(Color::Black));
+    this->getCell({7, 6}).setPiece((Piece*) new Knight(Color::Black));
+    this->getCell({7, 7}).setPiece((Piece*) new Rook(Color::Black));
+
+    this->getCell({0, 0}).setPiece((Piece*) new Rook(Color::Write));
+    this->getCell({0, 1}).setPiece((Piece*) new Knight(Color::Write));
+    this->getCell({0, 2}).setPiece((Piece*) new Bishop(Color::Write));
+    this->getCell({0, 3}).setPiece((Piece*) new Queen(Color::Write));
+    this->getCell({0, 4}).setPiece((Piece*) new King(Color::Write));
+    this->getCell({0, 5}).setPiece((Piece*) new Bishop(Color::Write));
+    this->getCell({0, 6}).setPiece((Piece*) new Knight(Color::Write));
+    this->getCell({0, 7}).setPiece((Piece*) new Rook(Color::Write));
+
+    for (int i = 0; i < 8; ++i) {
+        this->getCell({6, i}).setPiece((Piece*) new Pawn(Color::Black));
+        this->getCell({1, i}).setPiece((Piece*) new Pawn(Color::Write));
+    }
+
+    this->enPassant_ = {-1, -1};
+    this->whiteKingCoords_ = {0, 4};
+    this->whiteKingCoords_ = {7, 4};
+}
+
 Cell::Cell() {
     this->piece = nullptr;
 }
@@ -236,6 +263,7 @@ bool Piece::makeMove(Move m, Board &b) {
     b.getCell(m.first).getPiece()->setMoved(true);
 
     if (canMove(m, b)) {
+        b.setEnPassantCellCoords({-1, -1});
         if (b.getCell(m.second).getPiece() != nullptr) {
             delete b.getCell(m.second).getPiece();
         }
@@ -245,11 +273,6 @@ bool Piece::makeMove(Move m, Board &b) {
         return true;
     }
     return false;
-}
-
-bool Piece::makeMove(Move m, Board &b, std::string &s) {
-    s = toChessNotation(m);
-    return makeMove(m, b);
 }
 
 Rook::Rook(Color c) : Piece(c) {
@@ -336,6 +359,8 @@ bool Pawn::makeMove(Move m, Board &b) {
         int direction = this->color_ == Color::Write ? 1 : -1;
         if (!this->moved_ && from.first + direction * 2 == to.first)
             b.setEnPassantCellCoords(to);
+        else
+            b.setEnPassantCellCoords({-1, -1});
 
         PieceType pawnPromoting = PieceType::Pawn;
         if (to.first == 7 && this->color_ == Color::Write || to.first == 0 && this->color_ == Color::Black)
@@ -369,61 +394,6 @@ bool Pawn::makeMove(Move m, Board &b) {
 
         if (to == b.getEnPassantCellCoords())
             delete b.getCell({from.first, to.second}).getPiece();
-
-        return true;
-    }
-    return false;
-}
-
-bool Pawn::makeMove(Move m, Board &b, std::string &s) {
-    if (canMove(m, b)) {
-        b.getCell(m.first).getPiece()->setMoved(true);
-
-        Coords from = m.first;
-        Coords to = m.second;
-        int direction = this->color_ == Color::Write ? 1 : -1;
-        if (!this->moved_ && from.first + direction * 2 == to.first)
-            b.setEnPassantCellCoords(to);
-
-        PieceType pawnPromoting = PieceType::Pawn;
-        if (to.first == 7 && this->color_ == Color::Write || to.first == 0 && this->color_ == Color::Black)
-            if (!b.getPawnPromoting(pawnPromoting))
-                return false;
-
-        if (b.getCell(to).getPiece() != nullptr)
-            delete b.getCell(to).getPiece();
-
-        s = toChessNotation(m);
-        b.getCell(from).setPiece(nullptr);
-        switch (pawnPromoting) {
-            case PieceType::Rook:
-                b.getCell(to).setPiece((Piece *) new Rook(this->color_));
-                s += 'R';
-                delete this;
-                break;
-            case PieceType::Knight:
-                b.getCell(to).setPiece((Piece *) new Knight(this->color_));
-                s += 'N';
-                delete this;
-                break;
-            case PieceType::Queen:
-                b.getCell(to).setPiece((Piece *) new Queen(this->color_));
-                s += 'Q';
-                delete this;
-                break;
-            case PieceType::Bishop:
-                b.getCell(to).setPiece((Piece *) new Bishop(this->color_));
-                s += 'B';
-                delete this;
-                break;
-            default:
-                b.getCell(to).setPiece(this);
-        }
-
-        if (to == b.getEnPassantCellCoords()) {
-            delete b.getCell({from.first, to.second}).getPiece();
-            s += "e.p.";
-        }
 
         return true;
     }
@@ -537,6 +507,7 @@ bool King::canMove(Move m, Board &b) {
 
 bool King::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
+        b.setEnPassantCellCoords({-1, -1});
         b.getCell(m.first).getPiece()->setMoved(true);
         b.setKingCoords(m.second, this->color_);
 
@@ -563,47 +534,6 @@ bool King::makeMove(Move m, Board &b) {
             }
             b.getCell(m.second).setPiece(this);
             b.getCell(m.first).setPiece(nullptr);
-        }
-
-        return true;
-    }
-    return false;
-}
-
-bool King::makeMove(Move m, Board &b, std::string &s) {
-    if (canMove(m, b)) {
-        b.getCell(m.first).getPiece()->setMoved(true);
-        b.setKingCoords(m.second, this->color_);
-
-        int x = this->color_ == Color::Write ? 0 : 7;
-        if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {
-            b.getCell(m.second).setPiece(this);
-            b.getCell(m.first).setPiece(nullptr);
-
-            b.getCell({x, 3}).setPiece(b.getCell({x, 0}).getPiece());
-            b.getCell({x, 0}).setPiece(nullptr);
-
-            b.getCell({x, 3}).getPiece()->setMoved(true);
-
-            s = "0-0-0";
-        } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} && b.isShortCastlingPossible(this->color_)) {
-            b.getCell(m.second).setPiece(this);
-            b.getCell(m.first).setPiece(nullptr);
-
-            b.getCell({x, 5}).setPiece(b.getCell({x, 7}).getPiece());
-            b.getCell({x, 7}).setPiece(nullptr);
-
-            b.getCell({x, 5}).getPiece()->setMoved(true);
-
-            s = "0-0";
-        } else {
-            if (b.getCell(m.second).getPiece() != nullptr) {
-                delete b.getCell(m.second).getPiece();
-            }
-            b.getCell(m.second).setPiece(this);
-            b.getCell(m.first).setPiece(nullptr);
-
-            s = toChessNotation(m);
         }
 
         return true;

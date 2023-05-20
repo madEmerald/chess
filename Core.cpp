@@ -17,10 +17,6 @@ Color Core::getCurrentColor() {
     return this->game_->getCurrentColor();
 }
 
-void Core::newGame() {
-    this->game_->newGame();
-}
-
 std::set<Coords> Core::getAvailableMoves(Coords c) {
     return this->game_->getAvailableMoves(c);
 }

@@ -23,8 +23,6 @@ public:
 
     Color getCurrentColor();
 
-    void newGame();
-
     std::set<Coords> getAvailableMoves(Coords);
 
     bool makeMove(Coords, Coords);

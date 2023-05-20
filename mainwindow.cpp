@@ -18,8 +18,6 @@
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-
-    connect(ui->newGame, &QPushButton::clicked, this, &MainWindow::newGame);
 }
 
 MainWindow::~MainWindow() {
@@ -55,14 +53,6 @@ void MainWindow::showInfo() {
             ui->moveColor->setText("Ход чёрных");
             break;
     }
-}
-
-void MainWindow::newGame() {
-    this->core_->newGame();
-}
-
-void MainWindow::addMoveToHistory(const QString &s) {
-    ui->history->append(s);
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
