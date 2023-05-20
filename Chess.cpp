@@ -30,7 +30,7 @@ bool Game::makeMove(Move m) {
         return false;
 
     if (this->allPossibleMoves.count(m)) {
-        this->board.getCell(m.first).getPiece()->makeMove(m, this->board); //
+        this->getCell(m.first).getPiece()->makeMove(m, *this->board);
         this->currentColor = oppositeColor(this->currentColor);
         this->updateStatus();
 
@@ -48,7 +48,7 @@ void Game::getAllPossibleMoves() {
                 Coords c1 = {i / 8, i % 8};
                 Coords c2 = {j / 8, j % 8};
 
-                Board b = this->board.clone();
+                Board b = this->clone();
                 Piece *piece = b.getCell(c1).getPiece();
                 if (piece == nullptr || piece->getColor() != this->currentColor)
                     continue;
@@ -65,7 +65,7 @@ void Game::updateStatus() {
     this->getAllPossibleMoves();
     this->currentState = State::Common;
 
-    if (this->board.isUnderAttack(this->board.getKingCoords(this->currentColor), this->currentColor))
+    if (this->isUnderAttack(this->getKingCoords(this->currentColor), this->currentColor))
         this->currentState = State::Check;
 
     if (this->allPossibleMoves.empty()) {
@@ -77,9 +77,49 @@ void Game::updateStatus() {
 }
 
 Game::Game() {
-    this->board = Board();
+    this->board = new Board();
     this->currentColor = Color::Write;
     this->currentState = State::Common;
+}
+
+Cell Game::getCell(Coords c) {
+    this->board->getCell(c);
+}
+
+bool Game::isLongCastlingPossible(Color c) {
+    return this->board->isLongCastlingPossible(c);
+}
+
+bool Game::isShortCastlingPossible(Color c) {
+    return this->board->isShortCastlingPossible(c);
+}
+
+bool Game::isUnderAttack(Coords coords, Color color) {
+    return this->board->isUnderAttack(coords, color);
+}
+
+Board Game::clone() {
+    return this->board->clone();
+}
+
+void Game::setKingCoords(Coords coords, Color color) {
+    this->board->setKingCoords(coords, color);
+}
+
+void Game::setEnPassantCellCoords(Coords c) {
+    this->board->setEnPassantCellCoords(c);
+}
+
+Coords Game::getKingCoords(Color c) {
+    return this->board->getKingCoords(c);
+}
+
+Coords Game::getEnPassantCellCoords() {
+    return this->board->getEnPassantCellCoords();
+}
+
+bool Game::getPawnPromoting(PieceType &pieceType) {
+    return this->board->getPawnPromoting(pieceType);
 }
 
 bool Board::isLongCastlingPossible(Color c) {

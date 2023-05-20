@@ -96,24 +96,24 @@ private:
     Board(Cell (&cells)[8][8], Coords, Coords, Coords);
 public:
     Board();
-    Cell getCell(Coords);
-    bool isLongCastlingPossible(Color);
-    bool isShortCastlingPossible(Color);
-    bool isUnderAttack(Coords, Color);
-    Board clone();
-    void setKingCoords(Coords, Color);
-    void setEnPassantCellCoords(Coords);
-    Coords getKingCoords(Color);
-    Coords getEnPassantCellCoords();
+    virtual Cell getCell(Coords);
+    virtual bool isLongCastlingPossible(Color);
+    virtual bool isShortCastlingPossible(Color);
+    virtual bool isUnderAttack(Coords, Color);
+    virtual Board clone();
+    virtual void setKingCoords(Coords, Color);
+    virtual void setEnPassantCellCoords(Coords);
+    virtual Coords getKingCoords(Color);
+    virtual Coords getEnPassantCellCoords();
     virtual bool getPawnPromoting(PieceType&);
 };
 
-class Game : public BaseComponent {
+class Game : private Board, public BaseComponent {
 private:
     Color currentColor;
     State currentState;
     std::set<Move> allPossibleMoves;
-    Board board;
+    Board *board;
     void getAllPossibleMoves();
     void updateStatus();
 public:
@@ -122,6 +122,17 @@ public:
     State getCurrentState();
     std::set<Coords> getAvailableMoves(Coords);
     bool makeMove(Move);
+
+    Cell getCell(Coords) override;
+    bool isLongCastlingPossible(Color) override;
+    bool isShortCastlingPossible(Color) override;
+    bool isUnderAttack(Coords, Color) override;
+    Board clone() override;
+    void setKingCoords(Coords, Color) override;
+    void setEnPassantCellCoords(Coords) override;
+    Coords getKingCoords(Color) override;
+    Coords getEnPassantCellCoords() override;
+    bool getPawnPromoting(PieceType&) override;
 };
 
 #endif //CHESS_CHESS_H
