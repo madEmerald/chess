@@ -222,6 +222,8 @@ void Piece::setMoved(bool moved) {
 Piece::~Piece() = default;
 
 bool Piece::makeMove(Move m, Board &b) {
+    b.getCell(m.first).getPiece()->setMoved(true);
+
     if (canMove(m, b)) {
         if (b.getCell(m.second).getPiece() != nullptr) {
             delete b.getCell(m.second).getPiece();
@@ -512,6 +514,8 @@ bool King::canMove(Move m, Board &b) {
 
 bool King::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
+        b.getCell(m.first).getPiece()->setMoved(true);
+
         int x = this->color_ == Color::Write ? 0 : 7;
         if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {
             b.getCell(m.second).setPiece(this);
@@ -520,7 +524,6 @@ bool King::makeMove(Move m, Board &b) {
             b.getCell({x, 3}).setPiece(b.getCell({x, 0}).getPiece());
             b.getCell({x, 0}).setPiece(nullptr);
 
-            b.getCell(m.second).getPiece()->setMoved(true);
             b.getCell({x, 3}).getPiece()->setMoved(true);
         } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} && b.isShortCastlingPossible(this->color_)) {
             b.getCell(m.second).setPiece(this);
@@ -529,8 +532,13 @@ bool King::makeMove(Move m, Board &b) {
             b.getCell({x, 5}).setPiece(b.getCell({x, 7}).getPiece());
             b.getCell({x, 7}).setPiece(nullptr);
 
-            b.getCell(m.second).getPiece()->setMoved(true);
             b.getCell({x, 5}).getPiece()->setMoved(true);
+        } else {
+            if (b.getCell(m.second).getPiece() != nullptr) {
+                delete b.getCell(m.second).getPiece();
+            }
+            b.getCell(m.second).setPiece(this);
+            b.getCell(m.first).setPiece(nullptr);
         }
 
         return true;
@@ -538,3 +546,42 @@ bool King::makeMove(Move m, Board &b) {
     return false;
 }
 
+bool King::makeMove(Move m, Board &b, std::string &s) {
+    if (canMove(m, b)) {
+        b.getCell(m.first).getPiece()->setMoved(true);
+
+        int x = this->color_ == Color::Write ? 0 : 7;
+        if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {
+            b.getCell(m.second).setPiece(this);
+            b.getCell(m.first).setPiece(nullptr);
+
+            b.getCell({x, 3}).setPiece(b.getCell({x, 0}).getPiece());
+            b.getCell({x, 0}).setPiece(nullptr);
+
+            b.getCell({x, 3}).getPiece()->setMoved(true);
+
+            s = "0-0-0";
+        } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} && b.isShortCastlingPossible(this->color_)) {
+            b.getCell(m.second).setPiece(this);
+            b.getCell(m.first).setPiece(nullptr);
+
+            b.getCell({x, 5}).setPiece(b.getCell({x, 7}).getPiece());
+            b.getCell({x, 7}).setPiece(nullptr);
+
+            b.getCell({x, 5}).getPiece()->setMoved(true);
+
+            s = "0-0";
+        } else {
+            if (b.getCell(m.second).getPiece() != nullptr) {
+                delete b.getCell(m.second).getPiece();
+            }
+            b.getCell(m.second).setPiece(this);
+            b.getCell(m.first).setPiece(nullptr);
+
+            s = toChessNotation(m);
+        }
+
+        return true;
+    }
+    return false;
+}
