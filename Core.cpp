@@ -45,5 +45,5 @@ bool Core::getPawnPromoting(PieceType& pieceType) {
         pieceType = PieceType::Queen;
     }
 
-    return s == "";
+    return s.empty();
 }
