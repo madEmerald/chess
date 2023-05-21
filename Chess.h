@@ -114,13 +114,13 @@ private:
     State currentState;
     std::set<Move> allPossibleMoves;
     Board *board;
-    void getAllPossibleMoves();
+    void findAllPossibleMoves();
     void updateStatus();
 public:
     Game();
     Color getCurrentColor();
     State getCurrentState();
-    std::set<Move> getAvailableMoves(Coords);
+    std::set<Move> getAllPossibleMoves();
     bool makeMove(Move);
 
     Cell getCell(Coords) override;

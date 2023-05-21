@@ -18,7 +18,7 @@ Color Core::getCurrentColor() {
 }
 
 std::set<Coords> Core::getAvailableMoves(Coords c) {
-    auto availableMoves =  this->game_->getAvailableMoves(c);
+    auto availableMoves =  this->game_->getAllPossibleMoves();
     std::set<Coords> moveOptions;
     for (const auto& i : availableMoves) {
         if (i.first == c) {

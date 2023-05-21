@@ -2,7 +2,6 @@
 // Created by Никита on 12.05.2023.
 //
 
-#include <algorithm>
 #include <utility>
 #include "Chess.h"
 #include "Core.h"
@@ -19,11 +18,8 @@ State Game::getCurrentState() {
     return this->currentState;
 }
 
-std::set<Move> Game::getAvailableMoves(Coords c) {
-    std::set<Move> availableMoves;
-    std::copy_if(this->allPossibleMoves.begin(), this->allPossibleMoves.end(),
-                 std::back_inserter(availableMoves), [c](const Move &x) { return x.first == c; });
-    return availableMoves;
+std::set<Move> Game::getAllPossibleMoves() {
+    return this->allPossibleMoves;
 }
 
 bool Game::makeMove(Move m) {
@@ -40,7 +36,7 @@ bool Game::makeMove(Move m) {
     return false;
 }
 
-void Game::getAllPossibleMoves() {
+void Game::findAllPossibleMoves() {
     this->allPossibleMoves.clear();
 
     for (int i = 0; i < 64; ++i) {
@@ -63,7 +59,7 @@ void Game::getAllPossibleMoves() {
 }
 
 void Game::updateStatus() {
-    this->getAllPossibleMoves();
+    this->findAllPossibleMoves();
     this->currentState = State::Common;
 
     if (this->isUnderAttack(this->getKingCoords(this->currentColor), this->currentColor))
