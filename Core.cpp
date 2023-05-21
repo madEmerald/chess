@@ -18,7 +18,14 @@ Color Core::getCurrentColor() {
 }
 
 std::set<Coords> Core::getAvailableMoves(Coords c) {
-    return this->game_->getAvailableMoves(c);
+    auto availableMoves =  this->game_->getAvailableMoves(c);
+    std::set<Coords> moveOptions;
+    for (const auto& i : availableMoves) {
+        if (i.first == c) {
+            moveOptions.insert(i.second);
+        }
+    }
+    return moveOptions;
 }
 
 bool Core::makeMove(Coords from, Coords to) {

@@ -10,7 +10,7 @@
 #include <QPainter>
 #include <QDialog>
 #include <QVBoxLayout>
-#include <iostream>
+#include <QPushButton>
 
 #include "Core.h"
 

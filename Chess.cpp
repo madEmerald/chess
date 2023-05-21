@@ -19,8 +19,8 @@ State Game::getCurrentState() {
     return this->currentState;
 }
 
-std::set<Coords> Game::getAvailableMoves(Coords c) {
-    std::set<Coords> availableMoves;
+std::set<Move> Game::getAvailableMoves(Coords c) {
+    std::set<Move> availableMoves;
     std::copy_if(this->allPossibleMoves.begin(), this->allPossibleMoves.end(),
                  std::back_inserter(availableMoves), [c](const Move &x) { return x.first == c; });
     return availableMoves;

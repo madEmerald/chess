@@ -120,7 +120,7 @@ public:
     Game();
     Color getCurrentColor();
     State getCurrentState();
-    std::set<Coords> getAvailableMoves(Coords);
+    std::set<Move> getAvailableMoves(Coords);
     bool makeMove(Move);
 
     Cell getCell(Coords) override;
