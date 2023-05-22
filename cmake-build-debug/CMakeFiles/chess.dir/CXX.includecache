@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/CLionProjects/chess/BaseComponent.cpp
-BaseComponent.h
-C:/CLionProjects/chess/BaseComponent.h
-
 C:/CLionProjects/chess/BaseComponent.h
 utility
 -
@@ -35,6 +31,8 @@ C:/CLionProjects/chess/BaseComponent.h
 C:/CLionProjects/chess/Core.cpp
 Core.h
 C:/CLionProjects/chess/Core.h
+BaseComponent.h
+C:/CLionProjects/chess/BaseComponent.h
 
 C:/CLionProjects/chess/Core.h
 string
@@ -61,6 +59,10 @@ C:/CLionProjects/chess/cmake-build-debug/chess_autogen/EWIEGA46WW/moc_mainwindow
 C:/CLionProjects/chess/main.cpp
 mainwindow.h
 C:/CLionProjects/chess/mainwindow.h
+Chess.h
+C:/CLionProjects/chess/Chess.h
+Core.h
+C:/CLionProjects/chess/Core.h
 QApplication
 -
 

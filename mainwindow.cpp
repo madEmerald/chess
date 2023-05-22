@@ -97,7 +97,7 @@ QPoint MainWindow::getCoordsOfCell(Coords c) const {
 
 void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
-    painter.drawPixmap(45, 70, QPixmap("../images/board.png"));
+    painter.drawPixmap(this->leftTopBoardPoint, QPixmap("../images/board.png"));
 
     for (Coords x: this->availableMoves) {
         painter.drawPixmap(getCoordsOfCell(x), QPixmap("../images/availableMove.png"));

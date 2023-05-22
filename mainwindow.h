@@ -49,7 +49,7 @@ private:
     [[nodiscard]] QPoint getCoordsOfCell(Coords) const;
 
     const int cellSize = 63;
-    const QPoint leftTopBoardPoint = {85, 110};
+    const QPoint leftTopBoardPoint = {45, 110};
     const QPoint rightDownBoardPoint = {leftTopBoardPoint.x() + 8 * cellSize,
                                         leftTopBoardPoint.y() + 8 * cellSize};
     std::map<std::string, QPixmap> sprites = {{"bB", QPixmap("../images/blackBishop.png")},

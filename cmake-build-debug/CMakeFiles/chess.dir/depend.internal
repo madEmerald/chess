@@ -362,6 +362,8 @@ CMakeFiles/chess.dir/chess_autogen/mocs_compilation.cpp.obj
  C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtWidgets/qwidget.h
 CMakeFiles/chess.dir/main.cpp.obj
  C:/CLionProjects/chess/BaseComponent.h
+ C:/CLionProjects/chess/Chess.h
+ C:/CLionProjects/chess/Core.h
  C:/CLionProjects/chess/main.cpp
  C:/CLionProjects/chess/mainwindow.h
  C:/Qt/Qt5.12.2/5.12.2/mingw73_64/include/QtCore/qalgorithms.h
