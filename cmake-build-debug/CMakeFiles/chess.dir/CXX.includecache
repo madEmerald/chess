@@ -6,11 +6,23 @@
 
 #IncludeRegexTransform: 
 
+C:/CLionProjects/chess/BaseComponent.cpp
+BaseComponent.h
+C:/CLionProjects/chess/BaseComponent.h
+
 C:/CLionProjects/chess/BaseComponent.h
 utility
 -
 string
 -
+
+C:/CLionProjects/chess/Chess.cpp
+utility
+-
+Chess.h
+C:/CLionProjects/chess/Chess.h
+Core.h
+C:/CLionProjects/chess/Core.h
 
 C:/CLionProjects/chess/Chess.h
 utility
@@ -19,6 +31,10 @@ set
 -
 BaseComponent.h
 C:/CLionProjects/chess/BaseComponent.h
+
+C:/CLionProjects/chess/Core.cpp
+Core.h
+C:/CLionProjects/chess/Core.h
 
 C:/CLionProjects/chess/Core.h
 string
@@ -29,6 +45,24 @@ Chess.h
 C:/CLionProjects/chess/Chess.h
 mainwindow.h
 C:/CLionProjects/chess/mainwindow.h
+
+C:/CLionProjects/chess/cmake-build-debug/chess_autogen/EWIEGA46WW/moc_mainwindow.cpp
+../../../mainwindow.h
+C:/CLionProjects/chess/mainwindow.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
+
+C:/CLionProjects/chess/cmake-build-debug/chess_autogen/mocs_compilation.cpp
+EWIEGA46WW/moc_mainwindow.cpp
+C:/CLionProjects/chess/cmake-build-debug/chess_autogen/EWIEGA46WW/moc_mainwindow.cpp
+
+C:/CLionProjects/chess/main.cpp
+mainwindow.h
+C:/CLionProjects/chess/mainwindow.h
+QApplication
+-
 
 C:/CLionProjects/chess/mainwindow.cpp
 mainwindow.h

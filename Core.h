@@ -28,6 +28,8 @@ public:
     bool makeMove(Coords, Coords);
 
     bool getPawnPromoting(PieceType&);
+
+    std::vector<Token> getPiecesTokens();
 };
 
 #endif //CHESS_CORE_H
