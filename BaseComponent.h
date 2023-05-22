@@ -38,14 +38,4 @@ enum class PieceType {
     Rook
 };
 
-class Token {
-public:
-    Token(Coords, std::string);
-    Coords getPosition();
-    std::string getType();
-protected:
-    Coords position_;
-    std::string type_;
-};
-
 #endif //CHESS_BASECOMPONENT_H

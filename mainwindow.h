@@ -12,6 +12,15 @@
 #include <set>
 #include "BaseComponent.h"
 
+class Token {
+public:
+    Token(Coords, std::string);
+    Coords getPosition();
+    std::string getType();
+protected:
+    Coords position_;
+    std::string type_;
+};
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

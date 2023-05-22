@@ -14,6 +14,16 @@
 
 #include "Core.h"
 
+Token::Token(Coords position, std::string type) : position_(std::move(position)), type_(std::move(type)) {}
+
+Coords Token::getPosition() {
+    return this->position_;
+}
+
+std::string Token::getType() {
+    return this->type_;
+}
+
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
