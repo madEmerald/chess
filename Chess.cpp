@@ -77,6 +77,7 @@ Game::Game() {
     this->board = new Board();
     this->currentColor = Color::Write;
     this->currentState = State::Common;
+    this->findAllPossibleMoves();
 }
 
 Cell* Game::getCell(Coords c) {
@@ -229,12 +230,6 @@ void Board::setKingCoords(Coords coords, Color color) {
 }
 
 Board::Board() {
-    for (auto & cell : this->cells_) {
-        for (auto & j : cell) {
-            j = Cell();
-        }
-    }
-
     this->cells_[7][0].setPiece((Piece*) new Rook(Color::Black));
     this->cells_[7][1].setPiece((Piece*) new Knight(Color::Black));
     this->cells_[7][2].setPiece((Piece*) new Bishop(Color::Black));
@@ -277,7 +272,8 @@ void Cell::setPiece(Piece *p) {
 
 Cell Cell::clone() {
     Cell cell;
-    cell.setPiece(this->getPiece()->clone());
+    if (this->getPiece() != nullptr)
+        cell.setPiece(this->getPiece()->clone());
 
     return cell;
 }
