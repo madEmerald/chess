@@ -87,8 +87,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
 }
 
 Coords MainWindow::getClickedCell(int x, int y) const {
-    return {(x - this->leftTopBoardPoint.x()) / this->cellSize,
-            (y - this->leftTopBoardPoint.y()) / this->cellSize};
+    return {7 - (y - (this->leftTopBoardPoint.y() + this->indent)) / this->cellSize,
+            (x - (this->leftTopBoardPoint.x() + this->indent)) / this->cellSize};
 }
 
 QPoint MainWindow::getCoordsOfCell(Coords c) const {
