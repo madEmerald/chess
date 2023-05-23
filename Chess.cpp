@@ -62,7 +62,7 @@ void Game::updateStatus() {
     this->findAllPossibleMoves();
     this->currentState = State::Common;
 
-    if (this->isUnderAttack(this->getKingCoords(this->currentColor), this->currentColor))
+    if (this->isUnderAttack(this->getKingCoords(this->currentColor), oppositeColor(this->currentColor)))
         this->currentState = State::Check;
 
     if (this->allPossibleMoves.empty()) {
@@ -183,7 +183,7 @@ bool Board::isUnderAttack(Coords to, Color color) {
     for (int i = 0; i < 64; ++i) {
         Coords from = {i / 8, i % 8};
         Piece *attacker = this->cells_[i / 8][i % 8].getPiece();
-        if (attacker != nullptr && attacker->getColor() != color && attacker->canMove({from, to}, *this))
+        if (attacker != nullptr && attacker->getColor() == color && attacker->canMove({from, to}, *this))
             return true;
     }
     return false;
