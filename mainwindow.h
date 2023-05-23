@@ -51,8 +51,8 @@ private:
     const int cellSize = 63;
     const int indent = 40;
     const QPoint leftTopBoardPoint = {45, 110};
-    const QPoint rightDownBoardPoint = {leftTopBoardPoint.x() + 8 * cellSize,
-                                        leftTopBoardPoint.y() + 8 * cellSize};
+    const QPoint rightDownBoardPoint = {leftTopBoardPoint.x() + 8 * cellSize + indent * 2,
+                                        leftTopBoardPoint.y() + 8 * cellSize + indent * 2};
     std::map<std::string, QPixmap> sprites = {{"bB", QPixmap("../images/blackBishop.png")},
                                               {"bK", QPixmap("../images/blackKing.png")},
                                               {"bKn", QPixmap("../images/blackKnight.png")},

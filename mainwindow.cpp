@@ -68,8 +68,8 @@ void MainWindow::showInfo() {
 void MainWindow::mousePressEvent(QMouseEvent *event) {
     int x = event->x();
     int y = event->y();
-    if (x >= this->leftTopBoardPoint.x() && x <= this->rightDownBoardPoint.x() &&
-        y >= this->leftTopBoardPoint.y() && y <= this->rightDownBoardPoint.y()) {
+    if (x >= this->leftTopBoardPoint.x() + this->indent && x <= this->rightDownBoardPoint.x() - this->indent &&
+        y >= this->leftTopBoardPoint.y() + this->indent && y <= this->rightDownBoardPoint.y() - this->indent) {
         Coords clickedCell = this->getClickedCell(event->x(), event->y());
         if (this->availableMoves.count(clickedCell)) {
             this->core_->makeMove(this->selectedCell, clickedCell);
