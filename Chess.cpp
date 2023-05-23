@@ -197,8 +197,11 @@ Board::Board(Cell (&cells)[8][8], Coords enPassant, Coords whiteKingCoords, Coor
         enPassant_(std::move(enPassant)), whiteKingCoords_(std::move(whiteKingCoords)),
         blackKingCoords_(std::move(blackKingCoords)) {
     for (int i = 0; i < 8; ++i)
-        for (int j = 0; j < 8; ++j)
-            this->cells_[i][j] = cells[i][j].clone();
+        for (int j = 0; j < 8; ++j) {
+            Piece *piece = cells[i][j].getPiece();
+            if (piece != nullptr)
+                this->cells_[i][j].setPiece(piece->clone());
+        }
 }
 
 Board Board::clone() {
@@ -268,14 +271,6 @@ Piece *Cell::getPiece() {
 
 void Cell::setPiece(Piece *p) {
     this->piece = p;
-}
-
-Cell Cell::clone() {
-    Cell cell;
-    if (this->getPiece() != nullptr)
-        cell.setPiece(this->getPiece()->clone());
-
-    return cell;
 }
 
 Cell::~Cell() {

@@ -84,7 +84,6 @@ public:
     ~Cell();
     Piece* getPiece();
     void setPiece(Piece*);
-    Cell clone();
 };
 
 class Board {
