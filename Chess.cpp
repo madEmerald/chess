@@ -230,27 +230,27 @@ void Board::setKingCoords(Coords coords, Color color) {
 }
 
 Board::Board() {
-    this->cells_[7][0].setPiece((Piece*) new Rook(Color::Black));
-    this->cells_[7][1].setPiece((Piece*) new Knight(Color::Black));
-    this->cells_[7][2].setPiece((Piece*) new Bishop(Color::Black));
-    this->cells_[7][3].setPiece((Piece*) new Queen(Color::Black));
-    this->cells_[7][4].setPiece((Piece*) new King(Color::Black));
-    this->cells_[7][5].setPiece((Piece*) new Bishop(Color::Black));
-    this->cells_[7][6].setPiece((Piece*) new Knight(Color::Black));
-    this->cells_[7][7].setPiece((Piece*) new Rook(Color::Black));
+    this->cells_[7][0].setPiece(new Rook(Color::Black));
+    this->cells_[7][1].setPiece(new Knight(Color::Black));
+    this->cells_[7][2].setPiece(new Bishop(Color::Black));
+    this->cells_[7][3].setPiece(new Queen(Color::Black));
+    this->cells_[7][4].setPiece(new King(Color::Black));
+    this->cells_[7][5].setPiece(new Bishop(Color::Black));
+    this->cells_[7][6].setPiece(new Knight(Color::Black));
+    this->cells_[7][7].setPiece(new Rook(Color::Black));
 
-    this->cells_[0][0].setPiece((Piece*) new Rook(Color::Write));
-    this->cells_[0][1].setPiece((Piece*) new Knight(Color::Write));
-    this->cells_[0][2].setPiece((Piece*) new Bishop(Color::Write));
-    this->cells_[0][3].setPiece((Piece*) new Queen(Color::Write));
-    this->cells_[0][4].setPiece((Piece*) new King(Color::Write));
-    this->cells_[0][5].setPiece((Piece*) new Bishop(Color::Write));
-    this->cells_[0][6].setPiece((Piece*) new Knight(Color::Write));
-    this->cells_[0][7].setPiece((Piece*) new Rook(Color::Write));
+    this->cells_[0][0].setPiece(new Rook(Color::Write));
+    this->cells_[0][1].setPiece(new Knight(Color::Write));
+    this->cells_[0][2].setPiece(new Bishop(Color::Write));
+    this->cells_[0][3].setPiece(new Queen(Color::Write));
+    this->cells_[0][4].setPiece(new King(Color::Write));
+    this->cells_[0][5].setPiece(new Bishop(Color::Write));
+    this->cells_[0][6].setPiece(new Knight(Color::Write));
+    this->cells_[0][7].setPiece(new Rook(Color::Write));
 
     for (int i = 0; i < 8; ++i) {
-        this->cells_[6][i].setPiece((Piece*) new Pawn(Color::Black));
-        this->cells_[1][i].setPiece((Piece*) new Pawn(Color::Write));
+        this->cells_[6][i].setPiece(new Pawn(Color::Black));
+        this->cells_[1][i].setPiece(new Pawn(Color::Write));
     }
 
     this->enPassant_ = {-1, -1};

@@ -32,14 +32,14 @@ public:
     virtual bool makeMove(Move, Board&);
 };
 
-class Rook : private Piece {
+class Rook : public Piece {
 public:
     explicit Rook(Color);
     Rook* clone() override;
     bool canMove(Move, Board&) override;
 };
 
-class Pawn : private Piece {
+class Pawn : public Piece {
 public:
     explicit Pawn(Color);
     Pawn* clone() override;
@@ -47,28 +47,28 @@ public:
     bool makeMove(Move, Board&) override;
 };
 
-class Knight : private Piece {
+class Knight : public Piece {
 public:
     explicit Knight(Color);
     Knight* clone() override;
     bool canMove(Move, Board&) override;
 };
 
-class Bishop : private Piece {
+class Bishop : public Piece {
 public:
     explicit Bishop(Color);
     Bishop* clone() override;
     bool canMove(Move, Board&) override;
 };
 
-class Queen : private Piece {
+class Queen : public Piece {
 public:
     explicit Queen(Color);
     Queen* clone() override;
     bool canMove(Move, Board&) override;
 };
 
-class King : private Piece {
+class King : public Piece {
 public:
     explicit King(Color);
     King* clone() override;
