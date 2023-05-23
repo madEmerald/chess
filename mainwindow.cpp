@@ -24,7 +24,6 @@ std::string Token::getType() {
     return this->type_;
 }
 
-
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -93,8 +92,8 @@ Coords MainWindow::getClickedCell(int x, int y) const {
 }
 
 QPoint MainWindow::getCoordsOfCell(Coords c) const {
-    return {this->leftTopBoardPoint.x() + this->cellSize * c.first,
-            this->leftTopBoardPoint.y() + this->cellSize * c.second};
+    return {this->leftTopBoardPoint.x() + this->cellSize * c.second + this->indent,
+            this->leftTopBoardPoint.y() + this->cellSize * (7 - c.first) + this->indent};
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {

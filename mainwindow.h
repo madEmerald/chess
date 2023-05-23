@@ -49,6 +49,7 @@ private:
     [[nodiscard]] QPoint getCoordsOfCell(Coords) const;
 
     const int cellSize = 63;
+    const int indent = 40;
     const QPoint leftTopBoardPoint = {45, 110};
     const QPoint rightDownBoardPoint = {leftTopBoardPoint.x() + 8 * cellSize,
                                         leftTopBoardPoint.y() + 8 * cellSize};
