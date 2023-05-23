@@ -336,13 +336,13 @@ bool Rook::canMove(Move m, Board &b) {
         return false;
 
     int direction = to.first >= from.first ? 1 : -1;
-    for (int i = from.first + direction; i < to.first; i += direction) {
+    for (int i = from.first + direction; i * direction < to.first * direction; i += direction) {
         if (b.getCell({i, from.second})->getPiece() != nullptr)
             return false;
     }
 
     direction = to.second >= from.second ? 1 : -1;
-    for (int j = from.second + direction; j < to.second; j += direction) {
+    for (int j = from.second + direction; j * direction < to.second * direction; j += direction) {
         if (b.getCell({from.first, j})->getPiece() != nullptr)
             return false;
     }
