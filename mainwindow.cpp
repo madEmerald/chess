@@ -37,6 +37,7 @@ MainWindow::~MainWindow() {
 void MainWindow::showInfo() {
     State currentState = this->core_->getCurrentState();
     Color currentColor = this->core_->getCurrentColor();
+    this->pieces = this->core_->getPiecesTokens();
 
     switch (currentState) {
         case State::Common:
@@ -73,6 +74,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) {
         Coords clickedCell = this->getClickedCell(event->x(), event->y());
         if (this->availableMoves.count(clickedCell)) {
             this->core_->makeMove(this->selectedCell, clickedCell);
+            this->showInfo();
 
             this->selectedCell = {-1, -1};
             this->availableMoves.clear();

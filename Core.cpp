@@ -53,7 +53,7 @@ std::vector<Token> Core::getPiecesTokens() {
     std::vector<Token> pieces;
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
-            Piece* piece = this->game_->getCell({i, j}).getPiece();
+            Piece* piece = this->game_->getCell({i, j})->getPiece();
             if (piece != nullptr) {
                 std::string s;
                 if (piece->getColor() == Color::Write)

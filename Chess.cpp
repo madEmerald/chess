@@ -27,7 +27,7 @@ bool Game::makeMove(Move m) {
         return false;
 
     if (this->allPossibleMoves.count(m)) {
-        this->getCell(m.first).getPiece()->makeMove(m, *this->board);
+        this->getCell(m.first)->getPiece()->makeMove(m, *this->board);
         this->currentColor = oppositeColor(this->currentColor);
         this->updateStatus();
 
@@ -46,7 +46,7 @@ void Game::findAllPossibleMoves() {
                 Coords c2 = {j / 8, j % 8};
 
                 Board b = this->clone();
-                Piece *piece = b.getCell(c1).getPiece();
+                Piece *piece = b.getCell(c1)->getPiece();
                 if (piece == nullptr || piece->getColor() != this->currentColor)
                     continue;
 
@@ -79,7 +79,7 @@ Game::Game() {
     this->currentState = State::Common;
 }
 
-Cell Game::getCell(Coords c) {
+Cell* Game::getCell(Coords c) {
     return this->board->getCell(c);
 }
 
@@ -122,8 +122,8 @@ bool Game::getPawnPromoting(PieceType &pieceType) {
 bool Board::isLongCastlingPossible(Color c) {
     int x = c == Color::Write ? 0 : 7;
 
-    Piece *king = this->getCell({x, 4}).getPiece();
-    Piece *rook = this->getCell({x, 0}).getPiece();
+    Piece *king = this->cells_[x][4].getPiece();
+    Piece *rook = this->cells_[x][0].getPiece();
 
     if (king == nullptr || rook == nullptr)
         return false;
@@ -137,8 +137,8 @@ bool Board::isLongCastlingPossible(Color c) {
     if (king->isMoved() || rook->isMoved())
         return false;
 
-    if (this->getCell({x, 1}).getPiece() != nullptr || this->getCell({x, 2}).getPiece()
-        || this->getCell({x, 3}).getPiece())
+    if (this->cells_[x][1].getPiece() != nullptr || this->cells_[x][2].getPiece()
+        || this->cells_[x][3].getPiece())
         return false;
 
     if (this->isUnderAttack({x, 4}, oppositeColor(c))
@@ -152,8 +152,8 @@ bool Board::isLongCastlingPossible(Color c) {
 bool Board::isShortCastlingPossible(Color c) {
     int x = c == Color::Write ? 0 : 7;
 
-    Piece *king = this->getCell({x, 4}).getPiece();
-    Piece *rook = this->getCell({x, 7}).getPiece();
+    Piece *king = this->cells_[x][4].getPiece();
+    Piece *rook = this->cells_[x][7].getPiece();
 
     if (king == nullptr || rook == nullptr)
         return false;
@@ -167,7 +167,7 @@ bool Board::isShortCastlingPossible(Color c) {
     if (king->isMoved() || rook->isMoved())
         return false;
 
-    if (this->getCell({x, 5}).getPiece() != nullptr || this->getCell({x, 6}).getPiece())
+    if (this->cells_[x][5].getPiece() != nullptr || this->cells_[x][6].getPiece())
         return false;
 
     if (this->isUnderAttack({x, 4}, oppositeColor(c))
@@ -188,8 +188,8 @@ bool Board::isUnderAttack(Coords to, Color color) {
     return false;
 }
 
-Cell Board::getCell(Coords c) {
-    return this->cells_[c.first][c.second];
+Cell* Board::getCell(Coords c) {
+    return &(this->cells_[c.first][c.second]);
 }
 
 Board::Board(Cell (&cells)[8][8], Coords enPassant, Coords whiteKingCoords, Coords blackKingCoords) :
@@ -235,27 +235,27 @@ Board::Board() {
         }
     }
 
-    this->getCell({7, 0}).setPiece((Piece*) new Rook(Color::Black));
-    this->getCell({7, 1}).setPiece((Piece*) new Knight(Color::Black));
-    this->getCell({7, 2}).setPiece((Piece*) new Bishop(Color::Black));
-    this->getCell({7, 3}).setPiece((Piece*) new Queen(Color::Black));
-    this->getCell({7, 4}).setPiece((Piece*) new King(Color::Black));
-    this->getCell({7, 5}).setPiece((Piece*) new Bishop(Color::Black));
-    this->getCell({7, 6}).setPiece((Piece*) new Knight(Color::Black));
-    this->getCell({7, 7}).setPiece((Piece*) new Rook(Color::Black));
+    this->cells_[7][0].setPiece((Piece*) new Rook(Color::Black));
+    this->cells_[7][1].setPiece((Piece*) new Knight(Color::Black));
+    this->cells_[7][2].setPiece((Piece*) new Bishop(Color::Black));
+    this->cells_[7][3].setPiece((Piece*) new Queen(Color::Black));
+    this->cells_[7][4].setPiece((Piece*) new King(Color::Black));
+    this->cells_[7][5].setPiece((Piece*) new Bishop(Color::Black));
+    this->cells_[7][6].setPiece((Piece*) new Knight(Color::Black));
+    this->cells_[7][7].setPiece((Piece*) new Rook(Color::Black));
 
-    this->getCell({0, 0}).setPiece((Piece*) new Rook(Color::Write));
-    this->getCell({0, 1}).setPiece((Piece*) new Knight(Color::Write));
-    this->getCell({0, 2}).setPiece((Piece*) new Bishop(Color::Write));
-    this->getCell({0, 3}).setPiece((Piece*) new Queen(Color::Write));
-    this->getCell({0, 4}).setPiece((Piece*) new King(Color::Write));
-    this->getCell({0, 5}).setPiece((Piece*) new Bishop(Color::Write));
-    this->getCell({0, 6}).setPiece((Piece*) new Knight(Color::Write));
-    this->getCell({0, 7}).setPiece((Piece*) new Rook(Color::Write));
+    this->cells_[0][0].setPiece((Piece*) new Rook(Color::Write));
+    this->cells_[0][1].setPiece((Piece*) new Knight(Color::Write));
+    this->cells_[0][2].setPiece((Piece*) new Bishop(Color::Write));
+    this->cells_[0][3].setPiece((Piece*) new Queen(Color::Write));
+    this->cells_[0][4].setPiece((Piece*) new King(Color::Write));
+    this->cells_[0][5].setPiece((Piece*) new Bishop(Color::Write));
+    this->cells_[0][6].setPiece((Piece*) new Knight(Color::Write));
+    this->cells_[0][7].setPiece((Piece*) new Rook(Color::Write));
 
     for (int i = 0; i < 8; ++i) {
-        this->getCell({6, i}).setPiece((Piece*) new Pawn(Color::Black));
-        this->getCell({1, i}).setPiece((Piece*) new Pawn(Color::Write));
+        this->cells_[6][i].setPiece((Piece*) new Pawn(Color::Black));
+        this->cells_[1][i].setPiece((Piece*) new Pawn(Color::Write));
     }
 
     this->enPassant_ = {-1, -1};
@@ -307,15 +307,15 @@ void Piece::setMoved(bool moved) {
 Piece::~Piece() = default;
 
 bool Piece::makeMove(Move m, Board &b) {
-    b.getCell(m.first).getPiece()->setMoved(true);
+    b.getCell(m.first)->getPiece()->setMoved(true);
 
     if (canMove(m, b)) {
         b.setEnPassantCellCoords({-1, -1});
-        if (b.getCell(m.second).getPiece() != nullptr) {
-            delete b.getCell(m.second).getPiece();
+        if (b.getCell(m.second)->getPiece() != nullptr) {
+            delete b.getCell(m.second)->getPiece();
         }
-        b.getCell(m.second).setPiece(this);
-        b.getCell(m.first).setPiece(nullptr);
+        b.getCell(m.second)->setPiece(this);
+        b.getCell(m.first)->setPiece(nullptr);
 
         return true;
     }
@@ -341,18 +341,18 @@ bool Rook::canMove(Move m, Board &b) {
     if (from.first != to.first && from.second != to.second)
         return false;
 
-    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+    if (b.getCell(to)->getPiece() != nullptr && b.getCell(to)->getPiece()->getColor() == this->color_)
         return false;
 
     int direction = to.first >= from.first ? 1 : -1;
     for (int i = from.first + direction; i < to.first; i += direction) {
-        if (b.getCell({i, from.second}).getPiece() != nullptr)
+        if (b.getCell({i, from.second})->getPiece() != nullptr)
             return false;
     }
 
     direction = to.second >= from.second ? 1 : -1;
     for (int j = from.second + direction; j < to.second; j += direction) {
-        if (b.getCell({from.first, j}).getPiece() != nullptr)
+        if (b.getCell({from.first, j})->getPiece() != nullptr)
             return false;
     }
 
@@ -376,7 +376,7 @@ bool Pawn::canMove(Move m, Board &b) {
         return false;
 
     int direction = this->color_ == Color::Write ? 1 : -1;
-    Piece *target = b.getCell(to).getPiece();
+    Piece *target = b.getCell(to)->getPiece();
     if (target == nullptr) {
         if (b.getEnPassantCellCoords() == to)
             return true;
@@ -388,7 +388,7 @@ bool Pawn::canMove(Move m, Board &b) {
             return true;
 
         return !this->moved_ && from.first + direction * 2 == to.first &&
-               b.getCell({from.first + direction, from.second}).getPiece() == nullptr;
+               b.getCell({from.first + direction, from.second})->getPiece() == nullptr;
     } else {
         if (target->getColor() == this->color_)
             return false;
@@ -399,7 +399,7 @@ bool Pawn::canMove(Move m, Board &b) {
 
 bool Pawn::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
-        b.getCell(m.first).getPiece()->setMoved(true);
+        b.getCell(m.first)->getPiece()->setMoved(true);
 
         Coords from = m.first;
         Coords to = m.second;
@@ -414,33 +414,33 @@ bool Pawn::makeMove(Move m, Board &b) {
             if (!b.getPawnPromoting(pawnPromoting))
                 return false;
 
-        if (b.getCell(to).getPiece() != nullptr)
-            delete b.getCell(to).getPiece();
+        if (b.getCell(to)->getPiece() != nullptr)
+            delete b.getCell(to)->getPiece();
 
-        b.getCell(from).setPiece(nullptr);
+        b.getCell(from)->setPiece(nullptr);
         switch (pawnPromoting) {
             case PieceType::Rook:
-                b.getCell(to).setPiece((Piece *) new Rook(this->color_));
+                b.getCell(to)->setPiece((Piece *) new Rook(this->color_));
                 delete this;
                 break;
             case PieceType::Knight:
-                b.getCell(to).setPiece((Piece *) new Knight(this->color_));
+                b.getCell(to)->setPiece((Piece *) new Knight(this->color_));
                 delete this;
                 break;
             case PieceType::Queen:
-                b.getCell(to).setPiece((Piece *) new Queen(this->color_));
+                b.getCell(to)->setPiece((Piece *) new Queen(this->color_));
                 delete this;
                 break;
             case PieceType::Bishop:
-                b.getCell(to).setPiece((Piece *) new Bishop(this->color_));
+                b.getCell(to)->setPiece((Piece *) new Bishop(this->color_));
                 delete this;
                 break;
             default:
-                b.getCell(to).setPiece(this);
+                b.getCell(to)->setPiece(this);
         }
 
         if (to == b.getEnPassantCellCoords())
-            delete b.getCell({from.first, to.second}).getPiece();
+            delete b.getCell({from.first, to.second})->getPiece();
 
         return true;
     }
@@ -463,7 +463,7 @@ bool Knight::canMove(Move m, Board &b) {
     if (from == to)
         return false;
 
-    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+    if (b.getCell(to)->getPiece() != nullptr && b.getCell(to)->getPiece()->getColor() == this->color_)
         return false;
 
     return (Coords) {2, 1} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)};
@@ -488,7 +488,7 @@ bool Bishop::canMove(Move m, Board &b) {
     if (abs(from.second - to.second) != (from.first - to.first))
         return false;
 
-    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+    if (b.getCell(to)->getPiece() != nullptr && b.getCell(to)->getPiece()->getColor() == this->color_)
         return false;
 
     int startRow, direction;
@@ -501,7 +501,7 @@ bool Bishop::canMove(Move m, Board &b) {
     }
 
     for (int i = 1; std::min(from.second, to.second) + i < std::max(from.second, to.second); ++i)
-        if (b.getCell({startRow + i * direction, i}).getPiece() != nullptr)
+        if (b.getCell({startRow + i * direction, i})->getPiece() != nullptr)
             return false;
 
     return false;
@@ -537,7 +537,7 @@ bool King::canMove(Move m, Board &b) {
     if (from == to)
         return false;
 
-    if (b.getCell(to).getPiece() != nullptr && b.getCell(to).getPiece()->getColor() == this->color_)
+    if (b.getCell(to)->getPiece() != nullptr && b.getCell(to)->getPiece()->getColor() == this->color_)
         return false;
 
     int x = this->color_ == Color::Write ? 0 : 7;
@@ -555,32 +555,32 @@ bool King::canMove(Move m, Board &b) {
 bool King::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
         b.setEnPassantCellCoords({-1, -1});
-        b.getCell(m.first).getPiece()->setMoved(true);
+        b.getCell(m.first)->getPiece()->setMoved(true);
         b.setKingCoords(m.second, this->color_);
 
         int x = this->color_ == Color::Write ? 0 : 7;
         if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {
-            b.getCell(m.second).setPiece(this);
-            b.getCell(m.first).setPiece(nullptr);
+            b.getCell(m.second)->setPiece(this);
+            b.getCell(m.first)->setPiece(nullptr);
 
-            b.getCell({x, 3}).setPiece(b.getCell({x, 0}).getPiece());
-            b.getCell({x, 0}).setPiece(nullptr);
+            b.getCell({x, 3})->setPiece(b.getCell({x, 0})->getPiece());
+            b.getCell({x, 0})->setPiece(nullptr);
 
-            b.getCell({x, 3}).getPiece()->setMoved(true);
+            b.getCell({x, 3})->getPiece()->setMoved(true);
         } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} && b.isShortCastlingPossible(this->color_)) {
-            b.getCell(m.second).setPiece(this);
-            b.getCell(m.first).setPiece(nullptr);
+            b.getCell(m.second)->setPiece(this);
+            b.getCell(m.first)->setPiece(nullptr);
 
-            b.getCell({x, 5}).setPiece(b.getCell({x, 7}).getPiece());
-            b.getCell({x, 7}).setPiece(nullptr);
+            b.getCell({x, 5})->setPiece(b.getCell({x, 7})->getPiece());
+            b.getCell({x, 7})->setPiece(nullptr);
 
-            b.getCell({x, 5}).getPiece()->setMoved(true);
+            b.getCell({x, 5})->getPiece()->setMoved(true);
         } else {
-            if (b.getCell(m.second).getPiece() != nullptr) {
-                delete b.getCell(m.second).getPiece();
+            if (b.getCell(m.second)->getPiece() != nullptr) {
+                delete b.getCell(m.second)->getPiece();
             }
-            b.getCell(m.second).setPiece(this);
-            b.getCell(m.first).setPiece(nullptr);
+            b.getCell(m.second)->setPiece(this);
+            b.getCell(m.first)->setPiece(nullptr);
         }
 
         return true;

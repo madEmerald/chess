@@ -96,7 +96,6 @@ private:
     Board(Cell (&cells)[8][8], Coords, Coords, Coords);
 public:
     Board();
-    virtual Cell getCell(Coords);
     virtual bool isLongCastlingPossible(Color);
     virtual bool isShortCastlingPossible(Color);
     virtual bool isUnderAttack(Coords, Color);
@@ -106,6 +105,7 @@ public:
     virtual Coords getKingCoords(Color);
     virtual Coords getEnPassantCellCoords();
     virtual bool getPawnPromoting(PieceType&);
+    virtual Cell *getCell(Coords c);
 };
 
 class Game : private Board, public BaseComponent {
@@ -123,7 +123,7 @@ public:
     std::set<Move> getAllPossibleMoves();
     bool makeMove(Move);
 
-    Cell getCell(Coords) override;
+    Cell *getCell(Coords) override;
     bool isLongCastlingPossible(Color) override;
     bool isShortCastlingPossible(Color) override;
     bool isUnderAttack(Coords, Color) override;
