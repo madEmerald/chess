@@ -547,11 +547,11 @@ bool King::canMove(Move m, Board &b) {
 bool King::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
         b.setEnPassantCellCoords({-1, -1});
-        b.getCell(m.first)->getPiece()->setMoved(true);
         b.setKingCoords(m.second, this->color_);
 
         int x = this->color_ == Color::Write ? 0 : 7;
         if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 2} && b.isLongCastlingPossible(this->color_)) {
+            b.getCell(m.first)->getPiece()->setMoved(true);
             b.getCell(m.second)->setPiece(this);
             b.getCell(m.first)->setPiece(nullptr);
 
@@ -561,6 +561,7 @@ bool King::makeMove(Move m, Board &b) {
             b.getCell({x, 3})->getPiece()->setMoved(true);
         } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} &&
                    b.isShortCastlingPossible(this->color_)) {
+            b.getCell(m.first)->getPiece()->setMoved(true);
             b.getCell(m.second)->setPiece(this);
             b.getCell(m.first)->setPiece(nullptr);
 
@@ -569,13 +570,13 @@ bool King::makeMove(Move m, Board &b) {
 
             b.getCell({x, 5})->getPiece()->setMoved(true);
         } else {
+            b.getCell(m.first)->getPiece()->setMoved(true);
             if (b.getCell(m.second)->getPiece() != nullptr) {
                 delete b.getCell(m.second)->getPiece();
             }
             b.getCell(m.second)->setPiece(this);
             b.getCell(m.first)->setPiece(nullptr);
         }
-
         return true;
     }
     return false;
