@@ -3,7 +3,6 @@
 //
 
 #include "Core.h"
-#include "BaseComponent.h"
 
 Core::Core(MainWindow *interface, Game *game) : interface_(interface), game_(game) {
     this->interface_->setCore(this);

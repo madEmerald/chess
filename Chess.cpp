@@ -259,7 +259,7 @@ Board::Board() {
 
     this->enPassant_ = {-1, -1};
     this->whiteKingCoords_ = {0, 4};
-    this->whiteKingCoords_ = {7, 4};
+    this->blackKingCoords_ = {7, 4};
 }
 
 Cell::Cell() {
