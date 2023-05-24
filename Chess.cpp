@@ -27,11 +27,12 @@ bool Game::makeMove(Move m) {
         return false;
 
     if (this->allPossibleMoves.count(m)) {
-        this->getCell(m.first)->getPiece()->makeMove(m, *this);
-        this->currentColor = oppositeColor(this->currentColor);
-        this->updateStatus();
+        if (this->getCell(m.first)->getPiece()->makeMove(m, *this)) {
+            this->currentColor = oppositeColor(this->currentColor);
+            this->updateStatus();
 
-        return true;
+            return true;
+        }
     }
     return false;
 }
