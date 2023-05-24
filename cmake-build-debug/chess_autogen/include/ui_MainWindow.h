@@ -46,7 +46,7 @@ public:
         moveColor->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
         status = new QLabel(centralWidget);
         status->setObjectName(QString::fromUtf8("status"));
-        status->setGeometry(QRect(50, 660, 581, 61));
+        status->setGeometry(QRect(50, 680, 581, 61));
         status->setFont(font);
         status->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
         MainWindow->setCentralWidget(centralWidget);

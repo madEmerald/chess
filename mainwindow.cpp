@@ -43,7 +43,7 @@ void MainWindow::showInfo() {
             ui->status->setText("");
             break;
         case State::Mate: {
-            QByteArray s = currentColor == Color::Write ? "Мат. Победа белых." : "Мат. Победа чёрных.";
+            QByteArray s = currentColor == Color::Write ? "Мат. Победа чёрных." : "Мат. Победа белых.";
             ui->status->setText(s);
             break;
         }
