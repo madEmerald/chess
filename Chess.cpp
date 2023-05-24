@@ -476,7 +476,7 @@ bool Bishop::canMove(Move m, Board &b) {
     if (from == to)
         return false;
 
-    if (abs(from.second - to.second) != (from.first - to.first))
+    if (abs(from.first - to.first) != abs(from.second - to.second))
         return false;
 
     if (b.getCell(to)->getPiece() != nullptr && b.getCell(to)->getPiece()->getColor() == this->color_)
@@ -492,10 +492,10 @@ bool Bishop::canMove(Move m, Board &b) {
     }
 
     for (int i = 1; std::min(from.second, to.second) + i < std::max(from.second, to.second); ++i)
-        if (b.getCell({startRow + i * direction, i})->getPiece() != nullptr)
+        if (b.getCell({startRow + i * direction, std::min(from.second, to.second) + i})->getPiece() != nullptr)
             return false;
 
-    return false;
+    return true;
 }
 
 Queen::Queen(Color c) : Piece(c) {
