@@ -80,7 +80,7 @@ Game::Game() {
     this->findAllPossibleMoves();
 }
 
-Cell* Game::getCell(Coords c) {
+Cell *Game::getCell(Coords c) {
     return this->board->getCell(c);
 }
 
@@ -189,7 +189,7 @@ bool Board::isUnderAttack(Coords to, Color color) {
     return false;
 }
 
-Cell* Board::getCell(Coords c) {
+Cell *Board::getCell(Coords c) {
     return &(this->cells_[c.first][c.second]);
 }
 
@@ -457,7 +457,8 @@ bool Knight::canMove(Move m, Board &b) {
     if (b.getCell(to)->getPiece() != nullptr && b.getCell(to)->getPiece()->getColor() == this->color_)
         return false;
 
-    return (Coords) {2, 1} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)};
+    return (Coords) {2, 1} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)} ||
+           (Coords) {1, 2} == (Coords) {abs(from.first - to.first), abs(from.second - to.second)};
 }
 
 Bishop::Bishop(Color c) : Piece(c) {
@@ -558,7 +559,8 @@ bool King::makeMove(Move m, Board &b) {
             b.getCell({x, 0})->setPiece(nullptr);
 
             b.getCell({x, 3})->getPiece()->setMoved(true);
-        } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} && b.isShortCastlingPossible(this->color_)) {
+        } else if (m.first == (Coords) {x, 4} && m.second == (Coords) {x, 6} &&
+                   b.isShortCastlingPossible(this->color_)) {
             b.getCell(m.second)->setPiece(this);
             b.getCell(m.first)->setPiece(nullptr);
 
