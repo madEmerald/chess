@@ -27,7 +27,7 @@ bool Game::makeMove(Move m) {
         return false;
 
     if (this->allPossibleMoves.count(m)) {
-        this->getCell(m.first)->getPiece()->makeMove(m, *this->board);
+        this->getCell(m.first)->getPiece()->makeMove(m, *this);
         this->currentColor = oppositeColor(this->currentColor);
         this->updateStatus();
 

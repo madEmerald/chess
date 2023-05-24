@@ -12,19 +12,17 @@ utility
 string
 -
 
-C:/CLionProjects/chess/Chess.cpp
-utility
--
-Chess.h
-C:/CLionProjects/chess/Chess.h
-Core.h
-C:/CLionProjects/chess/Core.h
-
 C:/CLionProjects/chess/Chess.h
 utility
 -
 set
 -
+BaseComponent.h
+C:/CLionProjects/chess/BaseComponent.h
+
+C:/CLionProjects/chess/Core.cpp
+Core.h
+C:/CLionProjects/chess/Core.h
 BaseComponent.h
 C:/CLionProjects/chess/BaseComponent.h
 

@@ -46,7 +46,7 @@ bool Core::getPawnPromoting(PieceType& pieceType) {
         pieceType = PieceType::Queen;
     }
 
-    return s.empty();
+    return !s.empty();
 }
 
 std::vector<Token> Core::getPiecesTokens() {
