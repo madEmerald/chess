@@ -368,37 +368,41 @@ bool Pawn::canMove(Move m, Board &b) {
 
     int direction = this->color_ == Color::Write ? 1 : -1;
     Piece *target = b.getCell(to)->getPiece();
-    if (target == nullptr) {
-        if (b.getEnPassantCellCoords() == to)
+    if (from.first + direction == to.first && (from.second + 1 == to.second || from.second - 1 == to.second)) {
+        if (to == b.getEnPassantCellCoords())
             return true;
-
-        if (from.second != to.second)
-            return false;
-
-        if (from.first + direction == to.first)
+        if (target != nullptr && target->getColor() != this->color_)
             return true;
-
-        return !this->moved_ && from.first + direction * 2 == to.first &&
-               b.getCell({from.first + direction, from.second})->getPiece() == nullptr;
-    } else {
-        if (target->getColor() == this->color_)
-            return false;
-
-        return from.first + direction == to.first && (from.second + 1 == to.second || from.second - 1 == to.second);
     }
+    if (from.second != to.second)
+        return false;
+
+    if (target != nullptr)
+        return false;
+
+    if (from.first + direction == to.first)
+        return true;
+
+    return !this->moved_ && from.first + direction * 2 == to.first &&
+           b.getCell({from.first + direction, from.second})->getPiece() == nullptr;
 }
 
 bool Pawn::makeMove(Move m, Board &b) {
     if (canMove(m, b)) {
-        b.getCell(m.first)->getPiece()->setMoved(true);
-
         Coords from = m.first;
         Coords to = m.second;
+        if (to == b.getEnPassantCellCoords()) {
+            delete b.getCell({from.first, to.second})->getPiece();
+            b.getCell({from.first, to.second})->setPiece(nullptr);
+        }
+
         int direction = this->color_ == Color::Write ? 1 : -1;
         if (!this->moved_ && from.first + direction * 2 == to.first)
-            b.setEnPassantCellCoords(to);
+            b.setEnPassantCellCoords({from.first + direction, from.second});
         else
             b.setEnPassantCellCoords({-1, -1});
+
+        b.getCell(m.first)->getPiece()->setMoved(true);
 
         PieceType pawnPromoting = PieceType::Pawn;
         if (to.first == 7 && this->color_ == Color::Write || to.first == 0 && this->color_ == Color::Black)
@@ -429,10 +433,6 @@ bool Pawn::makeMove(Move m, Board &b) {
             default:
                 b.getCell(to)->setPiece(this);
         }
-
-        if (to == b.getEnPassantCellCoords())
-            delete b.getCell({from.first, to.second})->getPiece();
-
         return true;
     }
     return false;
