@@ -8,9 +8,8 @@ class Core;
 class BaseComponent {
 protected:
     Core *core_;
-
-public:
     explicit BaseComponent(Core *core = nullptr);
+public:
 
     void setCore(Core *core);
 };
